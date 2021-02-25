@@ -1,9 +1,8 @@
-Welcome to your Jupyter Book
-============================
+BP 219: Computational Protein Design Minicourse
+===
 
-This is a small sample book to give you a feel for how book content is
-structured.
+Course Instructor: Tanja Kortemme
 
-Check out the content pages bundled with this sample book to get started.
+Course schedule: 1-3p (see details [on the schedule page](./schedule.md))
 
-TEST HELLOW WORLD
+
