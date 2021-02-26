@@ -1,6 +1,3 @@
-file: content
+file: _intro
 sections:
-- file: intro
-- file: markdown
-- file: notebooks
 - file: schedule
