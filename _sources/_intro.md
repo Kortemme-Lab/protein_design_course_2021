@@ -5,6 +5,8 @@ Homepage
 
 Key concepts & state-of-the-art methods, hands-on component with team-based design projects in Rosetta. Genes for de novo designed proteins will be ordered and tested by the student teams in an additional class session in or at the end of module 3.
 
+Test
+
 - Course Director: Tanja Kortemme (kortemme@cgl.ucsf.edu)
 - Course Assistants:
      - Cody Krivacic (ckrivacic@berkeley.edu)
