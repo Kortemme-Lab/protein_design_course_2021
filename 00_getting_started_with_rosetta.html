@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic protein modeling in Rosetta &#8212; Computational Protein Design Minicourse</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Paper discussions" href="papers.html" />
+    <link rel="prev" title="Ligand Recognition" href="ligand_recognition.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Computational Protein Design Minicourse</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="_intro.html">
+   Homepage
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ligand_recognition.html">
+   Ligand Recognition
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Basic protein modeling in Rosetta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="papers.html">
+   Paper discussions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Course Schedule
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/00_getting_started_with_rosetta.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/00_getting_started_with_rosetta.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#storing-structure-information-in-rosetta-with-the-pose-class">
+   Storing structure information in Rosetta with the Pose class
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-your-pose-with-pymol">
+   Visualizing your pose with PyMOL
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relaxing-a-structure">
+   Relaxing a structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mutating-a-pose">
+   Mutating a pose
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="basic-protein-modeling-in-rosetta">
+<h1>Basic protein modeling in Rosetta<a class="headerlink" href="#basic-protein-modeling-in-rosetta" title="Permalink to this headline">¶</a></h1>
+<p>Rosetta is a software suite for working with models of proteins (or other molecules, like small molecule ligands and RNA).</p>
+<p>We can access all of Rosetta’s functions using the <code class="docutils literal notranslate"><span class="pre">pyrosetta</span></code> python package.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyrosetta</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pyrosetta</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">75</span><span class="n">cc088ea1f7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">pyrosetta</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">pyrosetta</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pyrosetta&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="storing-structure-information-in-rosetta-with-the-pose-class">
+<h2>Storing structure information in Rosetta with the Pose class<a class="headerlink" href="#storing-structure-information-in-rosetta-with-the-pose-class" title="Permalink to this headline">¶</a></h2>
+<p>Protein structures are stored in text files that contain the sequence information and the positions of each atom in cartesian space. We’ll work with the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> format , but there are other useful ones that Rosetta can use, such as the newer <code class="docutils literal notranslate"><span class="pre">mmCIF</span></code> format which accommates much larger models.</p>
+<p>After reading in a <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file, Rosetta stores the structure as an object of the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> class. It contains the atoms in the structure and the chemical connectivity. Additionally, it can store energies for each residue, any constraints we want to apply to the structure, and annotations from the original PDB. To manipulate a structure with Rosetta, we make operations on the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> object.</p>
+<p>We read in a <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file with the function <code class="docutils literal notranslate"><span class="pre">pose_from_pdb</span></code> in the <code class="docutils literal notranslate"><span class="pre">pyrosetta</span></code> package. Rosetta will print out lots of information about what it is parsing from the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file, choices it makes to pick a final representation, and compute the score (in Rosetta Energy Units or REU, something like a ΔG) of the structure using a default score function.</p>
+<p>We will work with the PDB 1QYS, which is Top7, a novel fold of protein designed using Rosetta!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pose</span> <span class="o">=</span> <span class="n">pyrosetta</span><span class="o">.</span><span class="n">pose_from_pdb</span><span class="p">(</span><span class="s1">&#39;1qys.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>core.import_pose.import_pose: File &#39;1qys.pdb&#39; automatically determined to be of type PDB
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading Selenium SE from MSE as SD from MET
+core.io.pose_from_sfr.PoseFromSFRBuilder: Reading MSE as MET!
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue LYS 13
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue LYS 13
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE  on residue LYS 13
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NZ  on residue LYS 13
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD1 on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD2 on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE1 on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE2 on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CZ  on residue PHE 15
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OG  on residue SER 25
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue GLN 28
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue GLN 28
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OE1 on residue GLN 28
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NE2 on residue GLN 28
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue LYS 29
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue LYS 29
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE  on residue LYS 29
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NZ  on residue LYS 29
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue ASN 32
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OD1 on residue ASN 32
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  ND2 on residue ASN 32
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue LEU 34
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD1 on residue LEU 34
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD2 on residue LEU 34
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue LYS 44
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue LYS 44
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE  on residue LYS 44
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NZ  on residue LYS 44
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NE  on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CZ  on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NH1 on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NH2 on residue ARG 45
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NE  on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CZ  on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NH1 on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NH2 on residue ARG 53
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue LYS 60
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue LYS 60
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CE  on residue LYS 60
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  NZ  on residue LYS 60
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CG  on residue GLU 71
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  CD  on residue GLU 71
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OE1 on residue GLU 71
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OE2 on residue GLU 71
+core.conformation.Conformation: <span class=" -Color -Color-Bold">[ WARNING ]</span> missing heavyatom:  OXT on residue LEU:CtermProteinFull 92
+core.pack.pack_missing_sidechains: packing residue number 13 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 15 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 25 because of missing atom number 6 atom name  OG
+core.pack.pack_missing_sidechains: packing residue number 28 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 29 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 32 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 34 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 44 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 45 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 53 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 60 because of missing atom number 6 atom name  CG
+core.pack.pack_missing_sidechains: packing residue number 71 because of missing atom number 6 atom name  CG
+core.pack.task: Packer task: initialize from command line()
+core.scoring.ScoreFunctionFactory: SCOREFUNCTION: <span class=" -Color -Color-Green">ref2015</span>
+core.pack.pack_rotamers: built 185 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can get lots of useful information from this <code class="docutils literal notranslate"><span class="pre">Pose</span></code> object, including:</p>
+<ul class="simple">
+<li><p>The structure’s sequence</p></li>
+<li><p>The number of chains</p></li>
+<li><p>The residue numbering (when residues are missing from a structure, the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> numbering will not match the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> numbering, as the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> numbering always starts at 1.</p></li>
+<li><p>The atomic position (X,Y,Z) coordinates of any atom, such as the alpha-carbons of two residues (and therefore the distance between them). The units are angstroms.</p></li>
+<li><p>The energy of individual residues</p></li>
+<li><p>The energy of the structure</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sequence</span>
+<span class="n">pose</span><span class="o">.</span><span class="n">sequence</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;DIQVQVNIDDNGKNFDYTYTVTTESELQKVLNELMDYIKKQGAKRVRISITARTKKEAEKFAAILIKVFAELGYNDINVTFDGDTVTVEGQL&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># chain and numbering info</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pose</span><span class="o">.</span><span class="n">pdb_info</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PDB file name: 1qys.pdb
+ Pose Range  Chain    PDB Range  |   #Residues         #Atoms
+
+0001 -- 0092    A 0003  -- 0094  |   0092 residues;    01477 atoms
+                           TOTAL |   0092 residues;    01477 atoms
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CA positions and distance</span>
+<span class="n">CA_1</span> <span class="o">=</span> <span class="n">pose</span><span class="o">.</span><span class="n">residue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">xyz</span><span class="p">(</span><span class="s2">&quot;CA&quot;</span><span class="p">)</span>
+<span class="n">CA_2</span> <span class="o">=</span> <span class="n">pose</span><span class="o">.</span><span class="n">residue</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">xyz</span><span class="p">(</span><span class="s2">&quot;CA&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CA_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">CA_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     -3.061000000000000       18.22800000000000       17.12200000000000
+    -0.8230000000000000       15.56200000000000       15.56800000000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Distance between the two residues, using the function norm()</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">atom1</span> <span class="o">-</span> <span class="n">atom2</span><span class="p">)</span><span class="o">.</span><span class="n">norm</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.55723980619958
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the energy terms for the 5th residue</span>
+<span class="n">pose</span><span class="o">.</span><span class="n">energies</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>core.scoring.Energies: E               fa_atr        fa_rep        fa_sol  fa_intra_repfa_intra_sol_x   lk_ball_wtd       fa_elec     pro_close   hbond_sr_bb   hbond_lr_bb   hbond_bb_sc      hbond_sc     dslf_fa13         omega        fa_dun       p_aa_pp yhh_planarity           ref   rama_prepro
+core.scoring.Energies: E(i)   5         -5.98          0.87          6.24          3.71          0.49          0.58         -2.63          0.00          0.00          0.00          0.00         -0.60          0.00          0.09         21.42          0.46          0.00         -1.45          0.09
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Structure energy</span>
+<span class="n">scorefxn</span> <span class="o">=</span> <span class="n">get_fa_scorefxn</span><span class="p">()</span>  <span class="c1"># a score function is just the equation that relates</span>
+<span class="n">scorefxn</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>core.scoring.ScoreFunctionFactory: SCOREFUNCTION: <span class=" -Color -Color-Green">ref2015</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>206.2147741464653
+</pre></div>
+</div>
+</div>
+</div>
+<p>A good resource for seeing everything the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> object has to offer is Figure 19.2 in the following paper describing Rosetta:</p>
+<ul class="simple">
+<li><p>Leaver-Fay, A., Tyka, M., Lewis, S. M., Lange, O. F., Thompson, J., Jacak, R., … &amp; Bradley, P. (2011). ROSETTA3: an object-oriented software suite for the simulation and design of macromolecules. Methods in enzymology, 487, 545-574.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/B9780123812704000196">https://www.sciencedirect.com/science/article/pii/B9780123812704000196</a></p></li>
+</ul>
+</div>
+<div class="section" id="visualizing-your-pose-with-pymol">
+<h2>Visualizing your pose with PyMOL<a class="headerlink" href="#visualizing-your-pose-with-pymol" title="Permalink to this headline">¶</a></h2>
+<p>While Rosetta doesn’t have its own GUI for viewing protein models, it is set up for easy linking to PyMOL. You should have received the script <code class="docutils literal notranslate"><span class="pre">PyMOL-RosettaServer.python3.py</span></code>. To start a connection between PyRosetta and PyMOL, start PyMOL and run <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">~/PyRosetta/PyMOL-RosettaServer.python3.py</span></code>. If the link is active, you should see “PyMOL &lt;—&gt; PyRosetta link started!” in your PyMOL console.</p>
+<p>NOTE: You can also make a file <code class="docutils literal notranslate"><span class="pre">.pymolrc</span></code> in your home directory and put that line of code there for it to run automatically when you initialize PyMOL.</p>
+<p>Once the link is set up, we can use a new class, the <code class="docutils literal notranslate"><span class="pre">PyMOLMover</span></code> to send the pose to PyMOL. A <code class="docutils literal notranslate"><span class="pre">Mover</span></code> is a class of Rosetta objects that operate on / alter <code class="docutils literal notranslate"><span class="pre">Pose</span></code> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmm</span> <span class="o">=</span> <span class="n">PyMOLMover</span><span class="p">()</span>
+<span class="n">pmm</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should now see Top7 in your PyMOL window.</p>
+<p>Let’s color each residue according to an energy term, <code class="docutils literal notranslate"><span class="pre">fa_sol</span></code>. This term accounts for the energetic penalty or favorability of a given side chain’s solvent accessibility in the structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmm</span><span class="o">.</span><span class="n">label_energy</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="s1">&#39;fa_sol&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You should see a striped pattern along the beta sheet. This is expected, as residues whose side chains point inwards towards the core are more blue (more negative/energetically favorable), while residues with solvent-exposed side chains are more red, as they pay a solvation penalty.</p>
+<p>This favorable tertiary structure pattern of residues - a hydrophobic core - was incorporated intentionally to enable folding into a stable protein.</p>
+<p>If you’d like to examine the way the side chains fit together within the core, you can see them by typing the following command into the PyMOL console: <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">sticks,</span> <span class="pre">not</span> <span class="pre">(name</span> <span class="pre">c+n+o)</span> <span class="pre">and</span> <span class="pre">not</span> <span class="pre">hydro</span></code></p>
+</div>
+<div class="section" id="relaxing-a-structure">
+<h2>Relaxing a structure<a class="headerlink" href="#relaxing-a-structure" title="Permalink to this headline">¶</a></h2>
+<p>You may have noticed that when we scored the pose above, the energy was positive (~200 REU), which means Rosetta thinks our pose is pretty unfavorable. Often, the bond lengths and angles of structures from the PDB are not ideal according to Rosetta. This is for a variety of reasons, both physical (crystal contacts introduce a bias, for example) and algorithmic (the refinement forcefields used to solve crystal structures and the score function in Rosetta each have their distinct biases). Typically when manipulating or analyzing a new PDB, we first optimize the structure for the Rosetta score function using a protocol known as <code class="docutils literal notranslate"><span class="pre">Relax</span></code>.</p>
+<p>Relaxing a structure consists of trying many slight perturbations to the backbone bonds (“minimization”) as well as trying other sidechain rotamers (“repacking”). We will learn more about these protocols later, but for now let’s just run the <code class="docutils literal notranslate"><span class="pre">Relax</span></code> code and see how it changes our structure.</p>
+<p>This run should take about 1 minute, and will spit out a lot of log information, as it iteratively. perturbs and re-scores the structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a copy of the pose</span>
+<span class="n">pose_relax</span> <span class="o">=</span> <span class="n">pose</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="n">pose_relax</span><span class="o">.</span><span class="n">pdb_info</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;1qys_relaxed&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a Mover that can run Relax on our pose</span>
+<span class="n">relax_mover</span> <span class="o">=</span> <span class="n">pyrosetta</span><span class="o">.</span><span class="n">rosetta</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">relax</span><span class="o">.</span><span class="n">FastRelax</span><span class="p">()</span>
+<span class="n">relax_mover</span><span class="o">.</span><span class="n">set_scorefxn</span><span class="p">(</span><span class="n">scorefxn</span><span class="p">)</span>                   <span class="c1"># we use the default score function, which we initialized earlier</span>
+<span class="n">relax_mover</span><span class="o">.</span><span class="n">constrain_relax_to_start_coords</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># we want to stay close to the starting coordinates, just refining a bit</span>
+
+<span class="c1"># run relax</span>
+<span class="n">relax_mover</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pose_relax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>core.scoring.ScoreFunctionFactory: SCOREFUNCTION: <span class=" -Color -Color-Green">ref2015</span>
+protocols.relax.FastRelax: CMD: repeat  206.215  0  0  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  206.215  0  0  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  7.09245  0  0  0.022
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2042 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -225.455  0  0  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -218.369  0  0  0.02805
+protocols.relax.FastRelax: CMD: min  -410.541  0.971168  0.971168  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -410.541  0.971168  0.971168  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -218.021  0.971168  0.971168  0.14575
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2413 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -246.91  0.971168  0.971168  0.14575
+protocols.relax.FastRelax: CMD: scale:fa_rep  -235.568  0.971168  0.971168  0.154
+protocols.relax.FastRelax: CMD: min  -349.553  0.768629  0.768629  0.154
+protocols.relax.FastRelax: CMD: coord_cst_weight  -349.553  0.768629  0.768629  0.154
+protocols.relax.FastRelax: CMD: scale:fa_rep  -300.015  0.768629  0.768629  0.30745
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1974 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -301.066  0.768629  0.768629  0.30745
+protocols.relax.FastRelax: CMD: scale:fa_rep  -297.305  0.768629  0.768629  0.31955
+protocols.relax.FastRelax: CMD: min  -310.724  0.683306  0.683306  0.31955
+protocols.relax.FastRelax: CMD: coord_cst_weight  -310.724  0.683306  0.683306  0.31955
+protocols.relax.FastRelax: CMD: scale:fa_rep  -264.845  0.683306  0.683306  0.55
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1993 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -265.067  0.683306  0.683306  0.55
+protocols.relax.FastRelax: CMD: min  -300.489  0.766356  0.766356  0.55
+protocols.relax.FastRelax: MRP: 0  -300.489  -300.489  0.766356  0.766356
+protocols.relax.FastRelax: CMD: accept_to_best  -300.489  0.766356  0.766356  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -300.489  0.766356  0.766356  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  -300.489  0.766356  0.766356  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  -363.934  0.766356  0.766356  0.022
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2232 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -371.421  0.766356  0.766356  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -369.623  0.766356  0.766356  0.02805
+protocols.relax.FastRelax: CMD: min  -428.239  0.989538  0.989538  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -428.239  0.989538  0.989538  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -281.686  0.989538  0.989538  0.14575
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2328 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -305.685  0.989538  0.989538  0.14575
+protocols.relax.FastRelax: CMD: scale:fa_rep  -297.867  0.989538  0.989538  0.154
+protocols.relax.FastRelax: CMD: min  -365.744  0.864521  0.864521  0.154
+protocols.relax.FastRelax: CMD: coord_cst_weight  -365.744  0.864521  0.864521  0.154
+protocols.relax.FastRelax: CMD: scale:fa_rep  -318.194  0.864521  0.864521  0.30745
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2083 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -319.679  0.864521  0.864521  0.30745
+protocols.relax.FastRelax: CMD: scale:fa_rep  -316.088  0.864521  0.864521  0.31955
+protocols.relax.FastRelax: CMD: min  -328.876  0.800308  0.800308  0.31955
+protocols.relax.FastRelax: CMD: coord_cst_weight  -328.876  0.800308  0.800308  0.31955
+protocols.relax.FastRelax: CMD: scale:fa_rep  -286.356  0.800308  0.800308  0.55
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2025 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -286.386  0.800308  0.800308  0.55
+protocols.relax.FastRelax: CMD: min  -303.47  0.782197  0.782197  0.55
+protocols.relax.FastRelax: MRP: 1  -303.47  -303.47  0.782197  0.782197
+protocols.relax.FastRelax: CMD: accept_to_best  -303.47  0.782197  0.782197  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -303.47  0.782197  0.782197  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  -303.47  0.782197  0.782197  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  -366.672  0.782197  0.782197  0.022
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2221 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -372.109  0.782197  0.782197  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -370.234  0.782197  0.782197  0.02805
+protocols.relax.FastRelax: CMD: min  -439.203  1.04546  1.04546  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -439.203  1.04546  1.04546  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -277.074  1.04546  1.04546  0.14575
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2341 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -289.756  1.04546  1.04546  0.14575
+protocols.relax.FastRelax: CMD: scale:fa_rep  -279.863  1.04546  1.04546  0.154
+protocols.relax.FastRelax: CMD: min  -369.18  0.862899  0.862899  0.154
+protocols.relax.FastRelax: CMD: coord_cst_weight  -369.18  0.862899  0.862899  0.154
+protocols.relax.FastRelax: CMD: scale:fa_rep  -319.963  0.862899  0.862899  0.30745
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1985 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -321.179  0.862899  0.862899  0.30745
+protocols.relax.FastRelax: CMD: scale:fa_rep  -317.401  0.862899  0.862899  0.31955
+protocols.relax.FastRelax: CMD: min  -330.864  0.797886  0.797886  0.31955
+protocols.relax.FastRelax: CMD: coord_cst_weight  -330.864  0.797886  0.797886  0.31955
+protocols.relax.FastRelax: CMD: scale:fa_rep  -286.276  0.797886  0.797886  0.55
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1965 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -286.467  0.797886  0.797886  0.55
+protocols.relax.FastRelax: CMD: min  -304.546  0.77773  0.77773  0.55
+protocols.relax.FastRelax: MRP: 2  -304.546  -304.546  0.77773  0.77773
+protocols.relax.FastRelax: CMD: accept_to_best  -304.546  0.77773  0.77773  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -304.546  0.77773  0.77773  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  -304.546  0.77773  0.77773  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  -367.777  0.77773  0.77773  0.022
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2216 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -372.551  0.77773  0.77773  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -370.756  0.77773  0.77773  0.02805
+protocols.relax.FastRelax: CMD: min  -441.547  1.06188  1.06188  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -441.547  1.06188  1.06188  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -280.845  1.06188  1.06188  0.14575
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2307 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -291.265  1.06188  1.06188  0.14575
+protocols.relax.FastRelax: CMD: scale:fa_rep  -281.304  1.06188  1.06188  0.154
+protocols.relax.FastRelax: CMD: min  -367.913  0.871038  0.871038  0.154
+protocols.relax.FastRelax: CMD: coord_cst_weight  -367.913  0.871038  0.871038  0.154
+protocols.relax.FastRelax: CMD: scale:fa_rep  -318.238  0.871038  0.871038  0.30745
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1917 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -318.599  0.871038  0.871038  0.30745
+protocols.relax.FastRelax: CMD: scale:fa_rep  -314.745  0.871038  0.871038  0.31955
+protocols.relax.FastRelax: CMD: min  -327.004  0.814399  0.814399  0.31955
+protocols.relax.FastRelax: CMD: coord_cst_weight  -327.004  0.814399  0.814399  0.31955
+protocols.relax.FastRelax: CMD: scale:fa_rep  -278.666  0.814399  0.814399  0.55
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1900 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -278.901  0.814399  0.814399  0.55
+protocols.relax.FastRelax: CMD: min  -304.867  0.781157  0.781157  0.55
+protocols.relax.FastRelax: MRP: 3  -304.867  -304.867  0.781157  0.781157
+protocols.relax.FastRelax: CMD: accept_to_best  -304.867  0.781157  0.781157  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -304.867  0.781157  0.781157  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  -304.867  0.781157  0.781157  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  -368.176  0.781157  0.781157  0.022
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2199 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -373.551  0.781157  0.781157  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -371.896  0.781157  0.781157  0.02805
+protocols.relax.FastRelax: CMD: min  -441.777  1.0646  1.0646  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -441.777  1.0646  1.0646  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -282.299  1.0646  1.0646  0.14575
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2227 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -292.753  1.0646  1.0646  0.14575
+protocols.relax.FastRelax: CMD: scale:fa_rep  -282.871  1.0646  1.0646  0.154
+protocols.relax.FastRelax: CMD: min  -369.011  0.875787  0.875787  0.154
+protocols.relax.FastRelax: CMD: coord_cst_weight  -369.011  0.875787  0.875787  0.154
+protocols.relax.FastRelax: CMD: scale:fa_rep  -317.87  0.875787  0.875787  0.30745
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 2016 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -319.048  0.875787  0.875787  0.30745
+protocols.relax.FastRelax: CMD: scale:fa_rep  -315.128  0.875787  0.875787  0.31955
+protocols.relax.FastRelax: CMD: min  -331.848  0.804193  0.804193  0.31955
+protocols.relax.FastRelax: CMD: coord_cst_weight  -331.848  0.804193  0.804193  0.31955
+protocols.relax.FastRelax: CMD: scale:fa_rep  -287.266  0.804193  0.804193  0.55
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 1986 rotamers at 92 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -287.28  0.804193  0.804193  0.55
+protocols.relax.FastRelax: CMD: min  -304.964  0.780503  0.780503  0.55
+protocols.relax.FastRelax: MRP: 4  -304.964  -304.964  0.780503  0.780503
+protocols.relax.FastRelax: CMD: accept_to_best  -304.964  0.780503  0.780503  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -304.964  0.780503  0.780503  0.55
+protocols::checkpoint: Deleting checkpoints of FastRelax
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmm</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pose_relax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>These two poses likely look very different, but that is in fact because the relaxed pose is translated and rotated in the PyMOL coordinate system. To really compare the two structures, run the following command in the PyMOL console <code class="docutils literal notranslate"><span class="pre">align</span> <span class="pre">1qys.pdb,</span> <span class="pre">1qys_relaxed</span></code>. This will align the original structure to the relaxed structure. The two structures should seem much more similar. PyMOL calculates the degree of difference between the two models after alignment, reported as a Root Mean Squared Deviation (RMSD). It should be about 0.7 or 0.8.</p>
+<p>We can also compute an RMSD metric in Rosetta - the function we will use only computes distances between matched alpha-carbons between the two structures:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pyrosetta</span><span class="o">.</span><span class="n">rosetta</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">CA_rmsd</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">pose_relax</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.78050297498703
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also see if the side chains have moved around. Type the following command into your PyMOL console: <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">sticks,</span> <span class="pre">not</span> <span class="pre">(name</span> <span class="pre">c+n+o)</span> <span class="pre">and</span> <span class="pre">not</span> <span class="pre">hydro</span></code>. You should see that some of the residues have different rotamers for their side chains, such a Lys31 or Asp38.</p>
+<p>Finally, let’s see if the <code class="docutils literal notranslate"><span class="pre">Relax</span></code> protocol did improve the score (energy) of the structure, as intended:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initial_score</span> <span class="o">=</span> <span class="n">scorefxn</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+<span class="n">relaxed_score</span> <span class="o">=</span> <span class="n">scorefxn</span><span class="p">(</span><span class="n">pose_relax</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">initial_score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">relaxed_score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">relaxed_score</span> <span class="o">-</span> <span class="n">initial_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>206.2147741464653
+-304.9643401505464
+-511.17911429701167
+</pre></div>
+</div>
+</div>
+</div>
+<p>Are you surprised by the large difference in score? Despite the overall change in structure being less than an Angstrom (using the RMSD metrics), there was a change of about ~500 REU! This was all from slight optimizations in protein backbone angles and side chain rotamer interactions. The score function is parameterized for 1 REU to be on the order of 0.1-1 kcal/mol, so this is a sizeable difference.</p>
+</div>
+<div class="section" id="mutating-a-pose">
+<h2>Mutating a pose<a class="headerlink" href="#mutating-a-pose" title="Permalink to this headline">¶</a></h2>
+<p>Protein design involves iteratively changing a protein sequence with new mutations and seeing if the resulting structure scores better in a desired metric (usually energy). Let’s try this out by mutating a residue in the relaxed Top7 pose and seeing how this changes the overall energy. We will use a convenient function, <code class="docutils literal notranslate"><span class="pre">mutate_residue</span></code> to mutate a hydrophobic residue (Val 8) in the core of protein to a less favorable polar residue (Thr). We will need to get the pose number for residue 8 first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pose_V8T</span> <span class="o">=</span> <span class="n">pose_relax</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+<span class="n">pose_V8T</span><span class="o">.</span><span class="n">pdb_info</span><span class="p">()</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;1qys_V8T&#39;</span><span class="p">)</span>
+
+<span class="n">res8</span> <span class="o">=</span> <span class="n">pose_V8T</span><span class="o">.</span><span class="n">pdb_info</span><span class="p">()</span><span class="o">.</span><span class="n">pdb2pose</span><span class="p">(</span><span class="n">chain</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="n">res</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">pyrosetta</span><span class="o">.</span><span class="n">toolbox</span><span class="o">.</span><span class="n">mutate_residue</span><span class="p">(</span><span class="n">pack_or_pose</span><span class="o">=</span><span class="n">pose_V8T</span><span class="p">,</span>
+                                 <span class="n">mutant_position</span><span class="o">=</span><span class="n">res8</span><span class="p">,</span>
+                                 <span class="n">mutant_aa</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">,</span>
+                                 <span class="n">pack_radius</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>core.scoring.ScoreFunctionFactory: SCOREFUNCTION: <span class=" -Color -Color-Green">ref2015</span>
+core.pack.task: Packer task: initialize from command line()
+core.pack.pack_rotamers: built 108 rotamers at 1 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can confirm that we mutated the residue correctly by querying the name of the residue at that position in both our original and mutated pose</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># confirm we mutated correctly</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pose_relax</span><span class="o">.</span><span class="n">residue</span><span class="p">(</span><span class="n">res8</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pose_V8T</span><span class="o">.</span><span class="n">residue</span><span class="p">(</span><span class="n">res8</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VAL
+THR
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s score the two poses</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mutated_score</span> <span class="o">=</span> <span class="n">scorefxn</span><span class="p">(</span><span class="n">pose_V8T</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mutated_score</span> <span class="o">-</span> <span class="n">relaxed_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.795649293731344
+</pre></div>
+</div>
+</div>
+</div>
+<p>We increased the score by ~5 REU, so Rosetta agrees with our intuition that the hydrophobic sidechain Val was preferred over Thr at that core position.</p>
+<p>We can look at the individual score terms to see which physical force accounts for this change in score</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Val8 terms, relaxed structure:</span><span class="se">\n</span><span class="s1">------------&#39;</span><span class="p">)</span>
+<span class="n">pose_relax</span><span class="o">.</span><span class="n">energies</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">res8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Thr8 terms, mutated structure:</span><span class="se">\n</span><span class="s1">------------&#39;</span><span class="p">)</span>
+<span class="n">pose_V8T</span><span class="o">.</span><span class="n">energies</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">res8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Val8 terms, relaxed structure:
+------------
+core.scoring.Energies: E               fa_atr        fa_rep        fa_sol  fa_intra_repfa_intra_sol_x   lk_ball_wtd       fa_elec     pro_close   hbond_sr_bb   hbond_lr_bb   hbond_bb_sc      hbond_sc     dslf_fa13         omega        fa_dun       p_aa_pp yhh_planarity           ref   rama_prepro
+core.scoring.Energies: E(i)   6         -6.97          1.36          1.16          3.17          0.05         -0.12         -1.63          0.00          0.00          0.00          0.00          0.00          0.00          0.29          0.01         -1.13          0.00          2.64         -0.12
+
+Thr8 terms, mutated structure:
+------------
+core.scoring.Energies: E               fa_atr        fa_rep        fa_sol  fa_intra_repfa_intra_sol_x   lk_ball_wtd       fa_elec     pro_close   hbond_sr_bb   hbond_lr_bb   hbond_bb_sc      hbond_sc     dslf_fa13         omega        fa_dun       p_aa_pp yhh_planarity           ref   rama_prepro
+core.scoring.Energies: E(i)   6         -6.08          0.87          3.16          1.67          0.06         -0.11         -1.75          0.00          0.00          0.00          0.00          0.00          0.00          0.24          0.04          0.07          0.00          1.15          0.47
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that there was an increase in the <code class="docutils literal notranslate"><span class="pre">fa_sol</span></code> term, which penalizes polar residues like Threonine being buried in the core:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fa_sol</span> <span class="o">=</span> <span class="n">pyrosetta</span><span class="o">.</span><span class="n">rosetta</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">ScoreType</span><span class="o">.</span><span class="n">fa_sol</span>
+
+<span class="n">V8_fa_sol</span> <span class="o">=</span> <span class="n">pose_relax</span><span class="o">.</span><span class="n">energies</span><span class="p">()</span><span class="o">.</span><span class="n">residue_total_energies</span><span class="p">(</span><span class="n">res8</span><span class="p">)[</span><span class="n">fa_sol</span><span class="p">]</span>
+<span class="n">T8_fa_sol</span> <span class="o">=</span> <span class="n">pose_V8T</span><span class="o">.</span><span class="n">energies</span><span class="p">()</span><span class="o">.</span><span class="n">residue_total_energies</span><span class="p">(</span><span class="n">res8</span><span class="p">)[</span><span class="n">fa_sol</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">T8_fa_sol</span> <span class="o">-</span> <span class="n">V8_fa_sol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0033733586316864
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pose_from_sequence ??</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="ligand_recognition.html" title="previous page">Ligand Recognition</a>
+    <a class='right-next' id="next-link" href="papers.html" title="next page">Paper discussions</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Kortemme Lab<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
