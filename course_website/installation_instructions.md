@@ -1,7 +1,7 @@
 Installing Prerequrisites
 ===
 
-### Installing course prerequisites
+## Installing course prerequisites
 
 You may want to create a folder for the class.
 mkdir proteindesign
