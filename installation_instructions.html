@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Computational Protein Design Minicourse</title>
+    <title>Installing Prerequrisites &#8212; Computational Protein Design Minicourse</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -52,8 +52,10 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic protein modeling in Rosetta" href="00_getting_started_with_rosetta.html" />
+    <link rel="prev" title="Homepage" href="_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -90,7 +92,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="ligand_recognition.html">
    Ligand Recognition
@@ -101,8 +103,8 @@
    Homepage
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="installation_instructions.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Installing Prerequrisites
   </a>
  </li>
@@ -148,6 +150,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/installation_instructions.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
 
@@ -164,6 +183,21 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-course-prerequisites">
+   Installing course prerequisites
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -172,19 +206,78 @@
         
               <div>
                 
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="installing-prerequrisites">
+<h1>Installing Prerequrisites<a class="headerlink" href="#installing-prerequrisites" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installing-course-prerequisites">
+<h2>Installing course prerequisites<a class="headerlink" href="#installing-course-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>You may want to create a folder for the class.
+mkdir proteindesign
+cd proteindesign</p>
+<p>Download anaconda:
+(MacOS) curl -O <a class="reference external" href="https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh">https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh</a>
+(Linux) wget <a class="reference external" href="https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh">https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh</a></p>
+<p>Install Anaconda:
+./Anaconda3-2020.11-<OS>.sh</p>
+<p>Download, install, and activate the following conda environment:
+(MacOS) curl-O <a class="reference external" href="https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml">https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml</a>
+(Linux) wget <a class="reference external" href="https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml">https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml</a></p>
+<p>conda env create –file conda_env.yml
+conda activate proteindesign</p>
+<p>Run the following commands to install additional dependencies:</p>
+<p>git clone <a class="reference external" href="https://github.com/Kortemme-Lab/klab">https://github.com/Kortemme-Lab/klab</a>
+cd klab
+python3 <a class="reference external" href="http://setup.py">setup.py</a> install
+cd ..
+git clone <a class="reference external" href="https://github.com/ckrivacic/roseasy.git">https://github.com/ckrivacic/roseasy.git</a>
+cd roseasy
+git checkout protein_design_course
+python3 <a class="reference external" href="http://setup.py">setup.py</a> install
+cd ..</p>
+<p>Finally, install PyRosetta:
+conda install -c <a class="reference external" href="https://levinthal:paradox&#64;conda.graylab.jhu.edu">https://levinthal:paradox&#64;conda.graylab.jhu.edu</a> pyrosetta</p>
+<p>To make sure PyRosetta installed correctly, run the following:
+Open an interactive Python session:
+Python
+Import PyRosetta and Roseasy to make sure they are installed:
+import pyrosetta
+import roseasy</p>
+<p>No errors should be thrown.</p>
+<p>Install wt_vs_mut
+In PyMOL, open the Plugin menu at the top and select Plugin Manager.
+Click “Install New Plugin”.
+In the URL field, paste the following URL and then click “fetch”:
+<a class="reference external" href="https://raw.githubusercontent.com/kalekundert/wt_vs_mut/master/wt_vs_mut.py">https://raw.githubusercontent.com/kalekundert/wt_vs_mut/master/wt_vs_mut.py</a>
+This allows you to examine specific differences between any proteins you design and their input structure.</p>
+</div>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="_intro.html" title="previous page">Homepage</a>
+    <a class='right-next' id="next-link" href="00_getting_started_with_rosetta.html" title="next page">Basic protein modeling in Rosetta</a>
 
         </div>
         
