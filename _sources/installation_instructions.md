@@ -139,7 +139,7 @@ Below the command, the path to the current directory will be printed.
 - `ls`: List the files and folders in the current directory
 - `cd <path>`: Change the current directory to "path." Paths can be relative to the current directory (e.g. `cd Documents`) or absolute (e.g. `cd /Users/username/Documents`). Absolute paths always start with a forward slash, while relative paths do not. This is true for most commands.  
 - `~`: Alias for your home folder.  E.g. `cd ~` will change your directory to your home folder.  
-- `.` and `..`: Alias for the current directory and the directory one level up, respectively.  
+- `.` and `..`: Alias for the current directory and the parent directory, respectively.  
 - `cp <src> <dest>`: Copy one or more files or folders from src to dest. E.g. `cp ~/docs/document.txt ~/Documents/` will copy 'document.txt' into the Documents folder, and `cp ~/docs/document.txt ~/Documents/doc.txt` will both copy and rename it.  
 - `mv <src> <dest>`: Move one or more files or folders from src to dest.  
 - `cat <file>`: Displays the contents of a file in the terminal.  
