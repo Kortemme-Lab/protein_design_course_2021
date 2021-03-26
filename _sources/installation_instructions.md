@@ -117,7 +117,7 @@ The terminal is a useful way of interacting with your operating system, and is t
 **To open a new terminal:**
 
 - (MacOS) Using the Spotlight feature (press \<cmd\>+\<space\>), search for "terminal" and press \<enter\>.  
-- (Linux) Opening a terminal on Linux will vary from distribution to distribution. Most distrubitions allow you to open a terminal using keyboard shortcut. Press \<ctrl\> + \<alt\> + t at the same time and a terminal window should appear.
+- (Linux) Opening a terminal on Linux will vary from distribution to distribution. Most distrubitions allow you to open a terminal using a keyboard shortcut. Press \<ctrl\> + \<alt\> + t at the same time and a terminal window should appear.
 
 **Navigating a terminal**
 
