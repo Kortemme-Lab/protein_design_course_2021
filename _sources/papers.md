@@ -2,6 +2,7 @@
 
 Here are references and links for the paper discussions
 
+## Week 1
 Session 1.1 (Mar 29): Introduction to course, topics, and projects
 - Pan, X., & Kortemme, T. (2021). ***Recent advances in de novo protein design: principles, methods, and applications.*** The Journal of Biological Chemistry, 100558. | [Pubmed](https://pubmed.ncbi.nlm.nih.gov/33744284/) | [Journal](https://doi.org/10.1016/j.jbc.2021.100558)
 
@@ -19,6 +20,7 @@ Session 1.5 (Apr 02): De novo folds and filters
 - Koga, N., Tatsumi-Koga, R., Liu, G., Xiao, R., Acton, T. B., Montelione, G. T., & Baker, D. (2012). ***Principles for designing ideal protein structures.*** Nature, 491(7423), 222–227. | [Pubmed](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3705962/) | [Journal](https://doi.org/10.1038/nature11600) 
 - Rocklin, G. J., Chidyausiku, T. M., Goreshnik, I., Ford, A., Houliston, S., Lemak, A., Carter, L., Ravichandran, R., Mulligan, V. K., Chevalier, A., Arrowsmith, C. H., & Baker, D. (2017). ***Global analysis of protein folding using massively parallel design, synthesis, and testing.*** Science, 357(6347), 168–175. | [Pubmed](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5568797/) | [Journal](https://doi.org/10.1126/science.aan0693)
 
+## Week 2
 Session 2.1 (Apr 05): Function design
 - Fleishman, S. J., & Baker, D. (2012). ***Role of the biomolecular energy gap in protein design, structure, and evolution.*** Cell, 149(2), 262–273. | [Pubmed](https://pubmed.ncbi.nlm.nih.gov/22500796/) | [Journal](https://doi.org/10.1016/j.cell.2012.03.016)
 
@@ -35,6 +37,7 @@ Session 2.4 (Apr 08): Loop modeling and filters
 Session 2.5 (Apr 09): Teams discuss project with TAs
 - No paper
 
+# Week 3
 Session 3.1 (Apr 12): Teams present progress
 - No paper
 
