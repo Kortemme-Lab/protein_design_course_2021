@@ -82,9 +82,9 @@ cd ..
 
 ## Installing PyRosetta
 PyRosetta can be installed with a simple conda command:  
-'''bash
+```bash
 conda install -c https://USERNAME:PASSWORD@conda.graylab.jhu.edu pyrosetta
-'''
+```
 The username and password will be provided via email.
 
 
