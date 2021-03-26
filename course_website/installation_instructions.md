@@ -136,5 +136,5 @@ Below the command, the path to the current directory will be printed.
 - `cp <src> <dest>`: Copy one or more files or folders from src to dest. E.g. `cp ~/docs/document.txt ~/Documents/` will copy 'document.txt' into the Documents folder, and `cp ~/docs/document.txt ~/Documents/doc.txt` will both copy and rename it.  
 - `mv <src> <dest>`: Move one or more files or folders from src to dest.  
 - `cat <file>`: Displays the contents of a file in the terminal.  
-- `cat <file> | grep <keyword`: Displays all the lines of a file that contain the keyword.  
+- `cat <file> | grep <keyword>`: Displays all the lines of a file that contain the keyword.  
 - `mkdir <folder>`: Create a new folder.  
