@@ -10,7 +10,7 @@ For this class, you will need to install the following programs from the termina
 - **RosEasy:** a package for managing and analyzing protein design projects.  
 - **klab:** a library of useful functions.  
 
-If you have never used a terminal, the basics will be outlined at the end of this page. 
+**If you have never used a terminal, the basics will be outlined at the end of this page; it may be useful to look at that first.** 
 
 ## Initial steps
 You may want to create a folder for the class where you can download and install prerequisites and exercises. 
