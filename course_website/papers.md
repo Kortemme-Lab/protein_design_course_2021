@@ -37,7 +37,7 @@ Session 2.4 (Apr 08): Loop modeling and filters
 Session 2.5 (Apr 09): Teams discuss project with TAs
 - No paper
 
-# Week 3
+## Week 3
 Session 3.1 (Apr 12): Teams present progress
 - No paper
 
