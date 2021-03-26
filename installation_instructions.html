@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Installing Prerequrisites &#8212; Computational Protein Design Minicourse</title>
+    <title>Installing Course Prerequrisites &#8212; Computational Protein Design Minicourse</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -105,7 +105,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Installing Prerequrisites
+   Installing Course Prerequrisites
   </a>
  </li>
  <li class="toctree-l1">
@@ -190,8 +190,38 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#installing-course-prerequisites">
-   Installing course prerequisites
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-steps">
+   Initial steps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-anaconda-and-creating-a-virtual-environment">
+   Installing Anaconda and creating a virtual environment
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-roseasy-and-klab">
+   Installing RosEasy and klab
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installing-pyrosetta">
+   Installing PyRosetta
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-wt-vs-mut">
+   Install wt_vs_mut
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#terminal-basics">
+   Terminal basics
   </a>
  </li>
 </ul>
@@ -206,48 +236,133 @@
         
               <div>
                 
-  <div class="section" id="installing-prerequrisites">
-<h1>Installing Prerequrisites<a class="headerlink" href="#installing-prerequrisites" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-course-prerequisites">
-<h2>Installing course prerequisites<a class="headerlink" href="#installing-course-prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>You may want to create a folder for the class.
-mkdir proteindesign
-cd proteindesign</p>
-<p>Download anaconda:
-(MacOS) curl -O <a class="reference external" href="https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh">https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh</a>
-(Linux) wget <a class="reference external" href="https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh">https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh</a></p>
-<p>Install Anaconda:
-./Anaconda3-2020.11-<OS>.sh</p>
-<p>Download, install, and activate the following conda environment:
-(MacOS) curl-O <a class="reference external" href="https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml">https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml</a>
-(Linux) wget <a class="reference external" href="https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml">https://raw.githubusercontent.com/ckrivacic/roseasy/master/conda_env.yml</a></p>
-<p>conda env create –file conda_env.yml
-conda activate proteindesign</p>
-<p>Run the following commands to install additional dependencies:</p>
-<p>git clone <a class="reference external" href="https://github.com/Kortemme-Lab/klab">https://github.com/Kortemme-Lab/klab</a>
-cd klab
-python3 <a class="reference external" href="http://setup.py">setup.py</a> install
-cd ..
-git clone <a class="reference external" href="https://github.com/ckrivacic/roseasy.git">https://github.com/ckrivacic/roseasy.git</a>
-cd roseasy
+  <div class="section" id="installing-course-prerequrisites">
+<h1>Installing Course Prerequrisites<a class="headerlink" href="#installing-course-prerequrisites" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>For this class, you will need to install the following programs from the terminal via command line:</p>
+<ul class="simple">
+<li><p><strong>Anaconda or miniconda:</strong> a Python distribution that makes sharing environments and package installation easier.</p></li>
+<li><p><strong>PyRosetta:</strong> an interactive Python-based interface for the Rosetta molecular modeling suite.</p></li>
+<li><p><strong>RosEasy:</strong> a package for managing and analyzing protein design projects.</p></li>
+<li><p><strong>klab:</strong> a library of useful functions.</p></li>
+</ul>
+<p>If you have never used a terminal, the basics will be outlined at the end of this page.</p>
+</div>
+<div class="section" id="initial-steps">
+<h2>Initial steps<a class="headerlink" href="#initial-steps" title="Permalink to this headline">¶</a></h2>
+<p>You may want to create a folder for the class where you can download and install prerequisites and exercises.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir proteindesign
+<span class="nb">cd</span> proteindesign
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-anaconda-and-creating-a-virtual-environment">
+<h2>Installing Anaconda and creating a virtual environment<a class="headerlink" href="#installing-anaconda-and-creating-a-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>Download anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>MacOS<span class="o">)</span> curl -O https://repo.anaconda.com/archive/Anaconda3-2020.11-MacOSX-x86_64.sh
+<span class="o">(</span>Linux<span class="o">)</span> wget https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
+</pre></div>
+</div>
+<p>Install Anaconda:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./Anaconda3-2020.11-&lt;OS&gt;.sh
+</pre></div>
+</div>
+<p>You will be asked where you want to install Anaconda; try to remember where you install it in case we need to troubleshoot anything.</p>
+<p>Next we will set up a new conda virtual environment. Each time you open a new terminal, you will need to activate this environment, described below, so that your Python executable can access PyRosetta/RosEasy dependencies.<br />
+To get started, download one of the following environment files, depending on your operating system:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>MacOS<span class="o">)</span> curl-O https://raw.githubusercontent.com/ckrivacic/roseasy/protein_design_course/conda_env.yml
+<span class="o">(</span>Linux<span class="o">)</span> wget https://raw.githubusercontent.com/ckrivacic/roseasy/protein_design_course/linux_env.yml
+</pre></div>
+</div>
+<p>Next, create the environment:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>MacOS<span class="o">)</span> conda env create --file conda_env.yml
+<span class="o">(</span>Linux<span class="o">)</span> conda env create --file linux_env.yml
+</pre></div>
+</div>
+<p>Now you are ready to activate your environment. <strong>You will need to run this command each time you open a new terminal.</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate proteindesign
+</pre></div>
+</div>
+<p>To check whether your environment is active, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>which python
+</pre></div>
+</div>
+<p>The output should look something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/path/to/anaconda/envs/proteindesign/bin/python
+</pre></div>
+</div>
+<p>(where <code class="docutils literal notranslate"><span class="pre">/path/to/anaconda</span></code> is a placeholder for your Anaconda install directory.)</p>
+</div>
+<div class="section" id="installing-roseasy-and-klab">
+<h2>Installing RosEasy and klab<a class="headerlink" href="#installing-roseasy-and-klab" title="Permalink to this headline">¶</a></h2>
+<p>We need to install these packages manually. Start by cloning the klab repository and installing it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/Kortemme-Lab/klab
+<span class="nb">cd</span> klab
+python3 setup.py install
+<span class="nb">cd</span> ..
+</pre></div>
+</div>
+<p>We’ll do the same for RosEasy, but in this case we will checkout out a branch that has been tailored for this class.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/ckrivacic/roseasy.git
+<span class="nb">cd</span> roseasy
 git checkout protein_design_course
-python3 <a class="reference external" href="http://setup.py">setup.py</a> install
-cd ..</p>
-<p>Finally, install PyRosetta:
-conda install -c <a class="reference external" href="https://levinthal:paradox&#64;conda.graylab.jhu.edu">https://levinthal:paradox&#64;conda.graylab.jhu.edu</a> pyrosetta</p>
-<p>To make sure PyRosetta installed correctly, run the following:
-Open an interactive Python session:
-Python
-Import PyRosetta and Roseasy to make sure they are installed:
-import pyrosetta
-import roseasy</p>
+python3 setup.py develop
+<span class="nb">cd</span> ..
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-pyrosetta">
+<h2>Installing PyRosetta<a class="headerlink" href="#installing-pyrosetta" title="Permalink to this headline">¶</a></h2>
+<p>PyRosetta can be installed with a simple conda command:<br />
+‘’’bash
+conda install -c <a class="reference external" href="https://USERNAME:PASSWORD&#64;conda.graylab.jhu.edu">https://USERNAME:PASSWORD&#64;conda.graylab.jhu.edu</a> pyrosetta
+‘’’
+The username and password will be provided via email.</p>
+<p>To make sure PyRosetta and RosEasy are installed correctly, open an interactive Python session:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python
+</pre></div>
+</div>
+<p>Import PyRosetta and Roseasy to make sure they are installed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyrosetta</span>
+<span class="kn">import</span> <span class="nn">roseasy</span>
+</pre></div>
+</div>
 <p>No errors should be thrown.</p>
-<p>Install wt_vs_mut
-In PyMOL, open the Plugin menu at the top and select Plugin Manager.
+</div>
+<div class="section" id="install-wt-vs-mut">
+<h2>Install wt_vs_mut<a class="headerlink" href="#install-wt-vs-mut" title="Permalink to this headline">¶</a></h2>
+<p>wt_vs_mut is a PyMOL plugin that will be useful for comparing designs to the input structure. It is not strictly necessary but it is highly recommended that you install it.</p>
+<p>In PyMOL, open the Plugin menu at the top and select Plugin Manager.
 Click “Install New Plugin”.
 In the URL field, paste the following URL and then click “fetch”:
 <a class="reference external" href="https://raw.githubusercontent.com/kalekundert/wt_vs_mut/master/wt_vs_mut.py">https://raw.githubusercontent.com/kalekundert/wt_vs_mut/master/wt_vs_mut.py</a>
 This allows you to examine specific differences between any proteins you design and their input structure.</p>
+</div>
+<div class="section" id="terminal-basics">
+<h2>Terminal basics<a class="headerlink" href="#terminal-basics" title="Permalink to this headline">¶</a></h2>
+<p>The terminal is a useful way of interacting with your operating system, and is the only way to run many academic programs.</p>
+<p><strong>To open a new terminal:</strong></p>
+<ul class="simple">
+<li><p>(MacOS) Using the Spotlight feature (press &lt;cmd&gt;+&lt;space&gt;), search for “terminal” and press &lt;enter&gt;.</p></li>
+<li><p>(Linux) Opening a terminal on Linux will vary from distribution to distribution. Most distrubitions allow you to open a terminal using keyboard shortcut. Press &lt;ctrl&gt; + &lt;alt&gt; + t at the same time and a terminal window should appear.</p></li>
+</ul>
+<p><strong>Navigating a terminal</strong></p>
+<p>To issue a command to the terminal, type the command and press &lt;enter&gt;. If the command has any text output, it will appear below your text. You will start in your home directory, which you can prove by issuing the “print working directory” command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pwd</span>
+</pre></div>
+</div>
+<p>Below the command, the path to the current directory will be printed.</p>
+<p><strong>Some other useful commands:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ls</span></code>: List the files and folders in the current directory</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">&lt;path&gt;</span></code>: Change the current directory to “path.” Paths can be relative to the current directory (e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">Documents</span></code>) or absolute (e.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/Users/username/Documents</span></code>). Absolute paths always start with a forward slash, while relative paths do not. This is true for most commands.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~</span></code>: Alias for your home folder.  E.g. <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~</span></code> will change your directory to your home folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">&lt;src&gt;</span> <span class="pre">&lt;dest&gt;</span></code>: Copy one or more files or folders from src to dest. E.g. <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">~/docs/document.txt</span> <span class="pre">~/Documents/</span></code> will copy ‘document.txt’ into the Documents folder, and <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">~/docs/document.txt</span> <span class="pre">~/Documents/doc.txt</span></code> will both copy and rename it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mv</span> <span class="pre">&lt;src&gt;</span> <span class="pre">&lt;dest&gt;</span></code>: Move one or more files or folders from src to dest.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">&lt;file&gt;</span></code>: Displays the contents of a file in the terminal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">&lt;file&gt;</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">&lt;keyword</span></code>: Displays all the lines of a file that contain the keyword.</p></li>
+</ul>
 </div>
 </div>
 
