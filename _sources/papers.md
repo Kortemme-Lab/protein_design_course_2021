@@ -1,4 +1,4 @@
-# Paper discussions
+# Additional Readings
 
 Here are references and links for the paper discussions
 
