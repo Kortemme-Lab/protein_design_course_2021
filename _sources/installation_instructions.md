@@ -33,7 +33,7 @@ Install Anaconda:
 ```
 You will be asked where you want to install Anaconda; try to remember where you install it in case we need to troubleshoot anything. 
 
-Next we will set up a new conda virtual environment. Each time you open a new terminal, you will need to activate this environment, described below, so that your Python executable can access PyRosetta/RosEasy dependencies.  
+Next we will set up a new conda virtual environment. **Each time you open a new terminal, you will need to activate this environment** (described below) so that your Python executable can access PyRosetta/RosEasy dependencies.  
 To get started, download one of the following environment files, depending on your operating system:  
 ```bash
 (MacOS) curl-O https://raw.githubusercontent.com/ckrivacic/roseasy/protein_design_course/conda_env.yml
