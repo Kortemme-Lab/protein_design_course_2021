@@ -3,7 +3,7 @@ Installing Course Prerequrisites
 
 ## Introduction
 
-For this class, you will need to install the following programs from the terminal via command line:  
+For this class, you will need to install the following programs:  
 
 - **Anaconda or miniconda:** a Python distribution that makes sharing environments and package installation easier.   
 - **PyRosetta:** an interactive Python-based interface for the Rosetta molecular modeling suite.  
