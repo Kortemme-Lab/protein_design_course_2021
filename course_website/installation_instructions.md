@@ -104,6 +104,12 @@ No errors should be thrown.
 ## Install wt_vs_mut
 wt_vs_mut is a PyMOL plugin that will be useful for comparing designs to the input structure. It is not strictly necessary but it is highly recommended that you install it.  
 
+Open PyMOL from your `proteindesign` virtual environment:  
+```bash
+conda activate proteindesign
+pymol
+```
+
 In PyMOL, open the Plugin menu at the top and select Plugin Manager.  
 Click “Install New Plugin”.  
 In the URL field, paste the following URL and then click “fetch”: 
