@@ -293,7 +293,7 @@ git clone https://github.com/Kortemme-Lab/protein_design_course_files.git
 </div>
 <div class="section" id="interacting-with-pyrosetta">
 <h2>Interacting with PyRosetta<a class="headerlink" href="#interacting-with-pyrosetta" title="Permalink to this headline">¶</a></h2>
-<p>We’ll do the first part of the exercise in a Jupyter notebook. Enter the command <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>, and in the browser window that opens, click <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">&gt;</span> <span class="pre">Python3</span></code>.</p>
+<p>We’ll do the first part of the exercise in a Jupyter notebook. Install Jupyter with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">jupyter</span></code>, then enter the command <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>, and in the browser window that opens, click <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">&gt;</span> <span class="pre">Python3</span></code>.</p>
 <p>In the Jupyter notebook, start with some PyRosetta setup. Before you run any other PyRosetta commands, you must run an init() command. It takes a string of options as an argument. The options we will be using are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-ex1</span></code> - Turns on one level of extra rotamers for more precise packing.</p></li>
@@ -1006,7 +1006,7 @@ protocols.denovo_design.movers.FastDesign: {0}
 </div>
 </div>
 <p>Now apply the mover once again and observe in PyMOL.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fd</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
 </pre></div>
