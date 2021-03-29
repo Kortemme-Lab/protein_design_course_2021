@@ -236,6 +236,11 @@
    Mutating a pose
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-resources">
+   Additional resources
+  </a>
+ </li>
 </ul>
 
         </nav>
@@ -252,7 +257,7 @@
 <h1>Basic protein modeling in Rosetta<a class="headerlink" href="#basic-protein-modeling-in-rosetta" title="Permalink to this headline">¶</a></h1>
 <p>Rosetta is a software suite for working with models of proteins (or other molecules, like small molecule ligands and RNA).</p>
 <p>We can access all of Rosetta’s functions using the <code class="docutils literal notranslate"><span class="pre">pyrosetta</span></code> python package.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyrosetta</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">pyrosetta</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
@@ -277,7 +282,7 @@
 <p>After reading in a <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file, Rosetta stores the structure as an object of the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> class. This class contains the atoms in the structure and the chemical connectivity. Additionally, it can store energies for each residue, any constraints we want to apply to the structure, and annotations from the original PDB. To manipulate a structure with Rosetta, we make operations on the <code class="docutils literal notranslate"><span class="pre">Pose</span></code> object.</p>
 <p>We read in a <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file with the function <code class="docutils literal notranslate"><span class="pre">pose_from_pdb</span></code> in the <code class="docutils literal notranslate"><span class="pre">pyrosetta</span></code> package. Rosetta will print out lots of information about what it is parsing from the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> file, choices it makes to pick a final representation, and compute the score of the structure using a default score function. The score is in Rosetta Energy Units/REU, which you can think of as something like a ΔG free energy.</p>
 <p>We will work with the PDB “1QYS”, which is the structure of Top7, a novel fold of protein designed using Rosetta!</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pose</span> <span class="o">=</span> <span class="n">pyrosetta</span><span class="o">.</span><span class="n">pose_from_pdb</span><span class="p">(</span><span class="s1">&#39;1qys.pdb&#39;</span><span class="p">)</span>
 </pre></div>
@@ -496,13 +501,19 @@ core.scoring.Energies: E(i)   5         -5.98          0.87          6.24       
 <p>You should see a striped pattern along the beta sheet. This is expected, as residues whose side chains point inwards towards the core are more blue (more negative/energetically favorable), while residues with solvent-exposed side chains are more red, as they pay a solvation penalty.</p>
 <p>This favorable tertiary structure pattern of residues - a hydrophobic core - was incorporated intentionally to enable folding into a stable protein.</p>
 <p>If you’d like to examine the way the side chains fit together within the core, you can see them by typing the following command into the PyMOL console: <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">sticks,</span> <span class="pre">not</span> <span class="pre">(name</span> <span class="pre">c+n+o)</span> <span class="pre">and</span> <span class="pre">not</span> <span class="pre">hydro</span></code></p>
+<p>As you can see, PyMOL is a very powerful tool for visualizing our structures over the course of designing and modeling our proteins! The following resources are great for getting used to PyMOL</p>
+<ul class="simple">
+<li><p>Tutorial: <a class="reference external" href="https://pymolwiki.org/index.php/Practical_Pymol_for_Beginners">https://pymolwiki.org/index.php/Practical_Pymol_for_Beginners</a></p></li>
+<li><p>Cheat Sheet: <a class="reference external" href="https://pymolwiki.org/index.php/CheatSheet">https://pymolwiki.org/index.php/CheatSheet</a></p></li>
+<li><p>List of all commands: <a class="reference external" href="https://pymolwiki.org/index.php/Category:Commands">https://pymolwiki.org/index.php/Category:Commands</a></p></li>
+</ul>
 </div>
 <div class="section" id="relaxing-a-structure">
 <h2>Relaxing a structure<a class="headerlink" href="#relaxing-a-structure" title="Permalink to this headline">¶</a></h2>
 <p>You may have noticed that when we scored the pose above, the energy was positive (~200 REU), which means Rosetta thinks our pose is pretty unfavorable. Often, the bond lengths and angles of structures from the PDB are not ideal according to Rosetta. This is for a variety of reasons, both physical (crystal contacts introduce a bias, for example) and algorithmic (the refinement forcefields used to solve crystal structures and the score function in Rosetta each have their distinct biases). Typically when manipulating or analyzing a new PDB, we first optimize the structure for the Rosetta score function using a protocol known as <code class="docutils literal notranslate"><span class="pre">Relax</span></code>.</p>
 <p>Relaxing a structure consists of trying many slight perturbations to the backbone bonds (“minimization”) as well as trying other sidechain rotamers (“repacking”). We will learn more about these protocols later, but for now let’s just run the <code class="docutils literal notranslate"><span class="pre">Relax</span></code> code and see how it changes our structure.</p>
 <p>This run should take about 1 minute, and will spit out a lot of log information, as it iteratively. perturbs and re-scores the structure.</p>
-<div class="cell docutils container">
+<div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a copy of the pose</span>
 <span class="n">pose_relax</span> <span class="o">=</span> <span class="n">pose</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
@@ -839,6 +850,14 @@ core.scoring.Energies: E(i)   6         -6.08          0.87          3.16       
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="additional-resources">
+<h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>For more resources, you can find full documentation of the PyRosetta codebase at <a class="reference external" href="https://graylab.jhu.edu/PyRosetta.documentation/">https://graylab.jhu.edu/PyRosetta.documentation/</a>. Please note that these are not annotated with rigorous examples or explanations of the functionalities of each Class or Function. These are simply explanations of the constructors and Methods available for each object in PyRosetta.</p></li>
+<li><p>For deeper explanations of the concepts in Rosetta, you can use the documentation wiki at <a class="reference external" href="http://new.rosettacommons.org/docs/latest/Home">http://new.rosettacommons.org/docs/latest/Home</a>. We especially recommend the tutorials at <a class="reference external" href="https://www.rosettacommons.org/demos/latest/Home#tutorials">https://www.rosettacommons.org/demos/latest/Home#tutorials</a>. Many of the topics we touch on briefly in the minicourse are described in more detail there.</p></li>
+<li><p>Finally, there is a useful page with some common PyRosetta commands available at <a class="reference external" href="https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf">https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf</a>. However, please note that this is a somewhat old document, and some of the functionality has been updated. It is good as a quick cheat sheet, but it is not guaranteed to be correct. We recommend confirming that your code is written correctly by checking the documentation or asking a TA.</p></li>
+</ul>
 </div>
 </div>
 
