@@ -467,8 +467,20 @@ core.scoring.Energies: E(i)   5         -5.98          0.87          6.24       
 </div>
 <div class="section" id="visualizing-your-pose-with-pymol">
 <h2>Visualizing your pose with PyMOL<a class="headerlink" href="#visualizing-your-pose-with-pymol" title="Permalink to this headline">¶</a></h2>
-<p>While Rosetta doesn’t have its own GUI for viewing protein models, it is set up for easy linking to PyMOL. You should have received the script <code class="docutils literal notranslate"><span class="pre">PyMOL-RosettaServer.python3.py</span></code>. To start a connection between PyRosetta and PyMOL, start PyMOL and run <code class="docutils literal notranslate"><span class="pre">run</span> <span class="pre">~/PyRosetta/PyMOL-RosettaServer.python3.py</span></code>. If the link is active, you should see “PyMOL &lt;—&gt; PyRosetta link started!” in your PyMOL console.</p>
-<p>NOTE: You can also make a file <code class="docutils literal notranslate"><span class="pre">.pymolrc</span></code> in your home directory and put that line of code there for it to run automatically when you initialize PyMOL.</p>
+<p>While Rosetta doesn’t have its own GUI for viewing protein models, it is set up for easy linking to PyMOL.</p>
+<p>Open a new terminal, activate your environment, and open PyMOL:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate proteindesign
+pymol
+</pre></div>
+</div>
+<p>In PyMOL, change your directory to the PyRosetta directory, and then run the <code class="docutils literal notranslate"><span class="pre">PyMOLRosettaServer.py</span></code> script.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/anaconda/envs/proteindesign/lib/python3.7/site-packages/pyrosetta
+run PyMOLRosettaServer.py
+</pre></div>
+</div>
+<p>PyMOL should display a message that says,
+<code class="docutils literal notranslate"><span class="pre">PyMOL</span> <span class="pre">&lt;---&gt;</span> <span class="pre">PyRosetta</span> <span class="pre">link</span> <span class="pre">started!</span></code></p>
+<p>NOTE: You can also make a file <code class="docutils literal notranslate"><span class="pre">.pymolrc</span></code> in your home directory and put the code to run the <code class="docutils literal notranslate"><span class="pre">PyMOLRosettaServer.py</span></code> line of code there for it to run automatically when you initialize PyMOL.</p>
 <p>Once the link is set up, we can use a new class, the <code class="docutils literal notranslate"><span class="pre">PyMOLMover</span></code> to send the pose to PyMOL. A <code class="docutils literal notranslate"><span class="pre">Mover</span></code> is a class of Rosetta objects that operate on / alter <code class="docutils literal notranslate"><span class="pre">Pose</span></code> objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -845,7 +857,7 @@ core.scoring.Energies: E(i)   6         -6.08          0.87          3.16       
 <ul class="simple">
 <li><p>For more resources, you can find full documentation of the PyRosetta codebase at <a class="reference external" href="https://graylab.jhu.edu/PyRosetta.documentation/">https://graylab.jhu.edu/PyRosetta.documentation/</a>. Please note that these are not annotated with rigorous examples or explanations of the functionalities of each Class or Function. These are simply explanations of the constructors and Methods available for each object in PyRosetta.</p></li>
 <li><p>For deeper explanations of the concepts in Rosetta, you can use the documentation wiki at <a class="reference external" href="http://new.rosettacommons.org/docs/latest/Home">http://new.rosettacommons.org/docs/latest/Home</a>. We especially recommend the tutorials at <a class="reference external" href="https://www.rosettacommons.org/demos/latest/Home#tutorials">https://www.rosettacommons.org/demos/latest/Home#tutorials</a>. Many of the topics we touch on briefly in the minicourse are described in more detail there.</p></li>
-<li><p>Finally, there is a useful page with some common PyRosetta commands available at <a class="reference external" href="https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf">https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf</a>. However, please note that this is a somewhat old document, and some of the functionality has been updated. It is good as a quick cheat sheet, but it is not guaranteed to be correct. We recommend confirming that your code is written correctly by checking the documentation or asking a TA.</p></li>
+<li><p>Finally, there is a useful page with some common PyRosetta commands available at <a class="reference external" href="https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf">https://graylab.jhu.edu/pyrosetta/downloads/documentation/PyRosetta_Workshops_Appendix_A.pdf</a>. However, please note that this is a somewhat old document, and some of the commands have been updated since the appendix was first compiled. It is good as a quick cheat sheet, but it is not guaranteed to be correct. We recommend confirming that your code is written correctly by checking the documentation or asking a TA.</p></li>
 </ul>
 </div>
 </div>
