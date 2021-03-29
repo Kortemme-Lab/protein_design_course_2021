@@ -29,7 +29,7 @@ Download Anaconda:
 
 Install Anaconda:
 ```bash
-./Anaconda3-2020.11-<OS>.sh
+bash Anaconda3-2020.11-<OS>.sh
 ```
 You will be asked where you want to install Anaconda; try to remember where you install it in case we need to troubleshoot anything. 
 
