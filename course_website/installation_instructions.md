@@ -1,4 +1,4 @@
-Installing Course Prerequrisites
+Installing Course Prerequisites
 ===
 
 ## Introduction
