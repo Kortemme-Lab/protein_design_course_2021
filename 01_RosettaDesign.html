@@ -322,6 +322,7 @@ git clone https://github.com/Kortemme-Lab/protein_design_course_files.git
 <li><p><code class="docutils literal notranslate"><span class="pre">-ex2</span></code> - Turns on a second level of extra rotamers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-use_input_sc</span></code> - Adds the rotamers from the input structure to the rotamer set.</p></li>
 </ul>
+<p>Copy the following into a notebook cell and execute it with &lt;shift&gt; + &lt;enter&gt;.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyrosetta</span> <span class="kn">import</span> <span class="n">rosetta</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">pose_from_file</span><span class="p">,</span> <span class="n">create_score_function</span>
@@ -375,7 +376,7 @@ run PyMOLRosettaServer.py
 </div>
 <p>PyMOL should display a message that says<br />
 <code class="docutils literal notranslate"><span class="pre">PyMOL</span> <span class="pre">&lt;---&gt;</span> <span class="pre">PyRosetta</span> <span class="pre">link</span> <span class="pre">started!</span></code></p>
-<p>Now we are ready to set up our PyMOL mover.</p>
+<p>Now we are ready to set up our PyMOL observer. In the Jupyter notebook, enter the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup the PyMOL mover</span>
@@ -952,17 +953,21 @@ protocols.denovo_design.movers.FastDesign: {0}
 </div>
 </div>
 </div>
-<p>As we can see, at least in this example, the score actually got worse!</p>
+<p>As we can see, at least in this example, the score actually got worse. Due to the stochasticity of the Monte-Carlo process, Rosetta protocols do not always result in an improved structure, even based on Rosetta’s own metrics.</p>
 </div>
 <div class="section" id="flexible-backbone-design">
 <h2>Flexible-backbone design<a class="headerlink" href="#flexible-backbone-design" title="Permalink to this headline">¶</a></h2>
-<p>Now we’ll do the same thing, but using a flexible-backbone protocol. Re-import the pose, add it to the PyMOL observer, and edit the MoveMap so that backbone degrees of freedom are enabled for the first 65 residues.</p>
+<p>Now we’ll run another round of design, this time using a flexible-backbone protocol. Re-import the pose, add it to the PyMOL observer, and edit the MoveMap so that backbone degrees of freedom are enabled for the first 65 residues:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pose</span> <span class="o">=</span> <span class="n">pose_from_file</span><span class="p">(</span><span class="s1">&#39;input.pdb.gz&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the pose</span>
+<span class="n">pose</span> <span class="o">=</span> <span class="n">pose_from_file</span><span class="p">(</span><span class="s1">&#39;input.pdb.gz&#39;</span><span class="p">)</span>
+<span class="c1"># Set up the PyMOL observer</span>
 <span class="n">pymover</span> <span class="o">=</span> <span class="n">rosetta</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">AddPyMOLObserver</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1"># Enable backbone degrees of freedom for the first 65 residues</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">66</span><span class="p">):</span>
     <span class="n">movemap</span><span class="o">.</span><span class="n">set_bb</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Add the movemap to the design protocol</span>
 <span class="n">fd</span><span class="o">.</span><span class="n">set_movemap</span><span class="p">(</span><span class="n">movemap</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1410,7 +1415,7 @@ protocols.denovo_design.movers.FastDesign: {0}
 </div>
 </div>
 </div>
-<p>The design scores slightly better in this case. Note that even with backbone degrees of freedom, design will not always result in a score that is lower than the input structure due to the stochastic nature of Monte-Carlo sampling.</p>
+<p>The design scores slightly better in this case. Note that even with backbone degrees of freedom, design will not always result in a score that is lower than the input structure. Hence, most design projects involve creating thousands of designs and then filtering them down to the most promising.</p>
 <p>We can see from these results that Rosetta found a different possible solution to the packing of this protein’s internal core. Once again, designed residues are in orange, input in blue.<br />
 <img alt="fastdesign_ex" src="_images/fastdesign_ex.png" /></p>
 </div>
@@ -1428,27 +1433,27 @@ protocols.denovo_design.movers.FastDesign: {0}
 </div>
 <div class="section" id="creating-multiple-designs">
 <h2>Creating multiple designs<a class="headerlink" href="#creating-multiple-designs" title="Permalink to this headline">¶</a></h2>
-<p>Now let’s create a few structures, using three different protocols, using Roseasy. The three protocols will do the following:</p>
+<p>Now let’s create a few structures, using three different protocols. The three protocols will do the following:</p>
 <ul class="simple">
 <li><p>Fixed-backbone design: Runs design without backbone degrees of freedom.</p></li>
 <li><p>Fastdesign: Runs design with backbone degrees of freedom. To limit the amount of computational resources required, we will only allow backbone degrees of freedom for designed or repacked residues.</p></li>
 <li><p>Layerdesign: Runs flexible backbone design while limiting allowable residues, depending on how solvent-accessible those positions are.</p></li>
 </ul>
-<p>Cancel out of the Jupyter session and then type one of the following commands from your workspace’s root directory.</p>
+<p>Cancel out of the Jupyter session and then type one of the following commands from your workspace’s root directory. Have each person in your group run a different command; if necessary, double up on the layerdesign command.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy submit . standard_params/fixbb.py -l -n <span class="m">10</span>
 roseasy submit . standard_params/fastdesign.py -l -n <span class="m">5</span>
 roseasy submit . standard_params/layerdesign.py -l -n <span class="m">5</span>
 </pre></div>
 </div>
-<p>This will cause you to run 5-10 simulations back-to-back, either using fixed-backbone design (<code class="docutils literal notranslate"><span class="pre">fixbb.py</span></code>), flexible-backbone design (<code class="docutils literal notranslate"><span class="pre">fastdesign.py</span></code>), or flexible-backbone design with layer design (<code class="docutils literal notranslate"><span class="pre">layerdesign.py</span></code>). If time permits (the above commands should take around 10-15 mintues), You can increase the number of designs Rosetta produces by changing the number at the end of the command. Output <code class="docutils literal notranslate"><span class="pre">.pdb.gz</span></code> files will be dumped into the <code class="docutils literal notranslate"><span class="pre">01_designs/outputs/</span></code> folder.</p>
+<p>This will cause Rosetta to run 5-10 simulations back-to-back, either using fixed-backbone design (<code class="docutils literal notranslate"><span class="pre">fixbb.py</span></code>), flexible-backbone design (<code class="docutils literal notranslate"><span class="pre">fastdesign.py</span></code>), or flexible-backbone design with layer design (<code class="docutils literal notranslate"><span class="pre">layerdesign.py</span></code>). If time permits (the above commands should take around 10-15 mintues), You can increase the number of designs Rosetta produces by changing the number at the end of the command. Output <code class="docutils literal notranslate"><span class="pre">.pdb.gz</span></code> files will be dumped into the <code class="docutils literal notranslate"><span class="pre">01_designs/outputs/</span></code> folder. If you run multiple <code class="docutils literal notranslate"><span class="pre">submit</span></code> commands, each command will create a new design folder, incrementing the number at the start.</p>
 </div>
 <div class="section" id="plotting-design-structures">
 <h2>Plotting design structures<a class="headerlink" href="#plotting-design-structures" title="Permalink to this headline">¶</a></h2>
-<p>Once your job is complete (should take ~5 - 20 minutes), open a RosEasy plotting gui:</p>
+<p>Once your job is complete (should take ~5 - 20 minutes), open a RosEasy plotting graphical user interface:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy plot 01_designs/outputs/
 </pre></div>
 </div>
-<p>The GUI is able to plot a number of different metrics that the scripts calculate against one another. To change the X- and Y-axis, select a different metric from the drop-down menus below the scatter plot (you may need to resize the windows to see the drop-down menus). We will discuss these metrics in a later class. For now, plot the “packstat” score against the Rosetta total score. The PackStat score probes protein cores to find cavities; a higher score is better. <strong>How does the PackStat score compare between the different methods? What accounts for this trend?</strong></p>
+<p>The GUI allows you to plot any metric, including the Rosetta score, against various other metrics that are calculatd by the script. To change the X- and Y-axis, select a different metric from the drop-down menus below the scatter plot (you may need to resize the window to see the drop-down menus). We will discuss these metrics in a later class. For now, plot the “packstat” score against the Rosetta total score. The PackStat score probes protein cores to find cavities; a higher score indicates fewer cavities and is therefore better. <strong>How does the PackStat score compare between the different methods? What accounts for this trend?</strong></p>
 <p>Examine a your designs by right-clicking on each point in the plot, then selecting “compare to input”. If you have the <code class="docutils literal notranslate"><span class="pre">wt_vs_mut</span></code> PyMOL plugin installed, you can type “ww” in PyMOL to compare individual mutations. The wildtype residue will appear in white, mutant in yellow.</p>
 <p><strong>Pick a few interesting mutations and describe what is happening. Is an existing packing interaction being displaced? Is Rosetta forming an internal salt bridge? Do you see a buried unsatisfied hydrogen bond?</strong></p>
 <p><strong>Compare your group’s flexible-backbone results with your group’s layerdesign results. Visually compare average runtimes by plotting run time on the X-axis. Was there a significant reduction in run time for layered design vs. flexible backbone design? (Computer speed and temperature may confound this, but see if you observe a general trend.) How do the scores compare between the two design methods?</strong></p>
@@ -1458,11 +1463,11 @@ roseasy submit . standard_params/layerdesign.py -l -n <span class="m">5</span>
 <p>Now that you’ve looked at your designs, let’s summarize them in a table so we can look at their sequence similarity to the experimental results. Run:<br />
 <code class="docutils literal notranslate"><span class="pre">roseasy</span> <span class="pre">make_table</span> <span class="pre">01_designs/</span></code></p>
 <p>Roseasy will create an Excel file that summarizes a bunch of design parameters. The important column is ‘Resfile sequence’, which contains the residue identities of all the designable positions. The ordering is the same as in Figure 2.</p>
-<p><strong>With your group, compare your outputs to those from the Lim paper. Looking at figure 2, how many of your designs are “functional”? Partially functional? Non-functional? Wildtype? Most will likely have no data, but based on your group’s data, which, if any, design method best recapitulated the experimental results?</strong></p>
+<p><strong>With your group, compare your outputs to those from the Lim paper. Looking at figure 2, how many of your designs are “functional”? Partially functional? Non-functional? Wildtype? Most will likely have no data, but based on your group’s sequences, which, if any, design method best recapitulated the experimental results?</strong></p>
 </div>
 <div class="section" id="rosetta-evaluation-of-known-sequences">
 <h2>Rosetta evaluation of known sequences<a class="headerlink" href="#rosetta-evaluation-of-known-sequences" title="Permalink to this headline">¶</a></h2>
-<p>Finally, pick a functional sequence from the Lim paper and edit the resfile so that Rosetta is forced to recapitulate that sequence. To do this, edit each line so that instead of</p>
+<p>Finally, pick a functional sequence from the Lim paper, preferably one with a relatively high estimated core van der Waals volume, and edit the resfile so that Rosetta is forced to recapitulate that sequence. To do this, edit each line so that instead of</p>
 <p><code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">A</span> <span class="pre">ALLAA</span></code></p>
 <p>it says</p>
 <p><code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">A</span> <span class="pre">PIKAA</span> <span class="pre">RES</span></code>.</p>
@@ -1470,7 +1475,7 @@ roseasy submit . standard_params/layerdesign.py -l -n <span class="m">5</span>
 <p>Run a few flexible backbone simulations using the new resfile (if you have time, increase the number of simulations):</p>
 <p><code class="docutils literal notranslate"><span class="pre">roseasy</span> <span class="pre">submit</span> <span class="pre">.</span> <span class="pre">standard_params/fastdesign.py</span> <span class="pre">-l</span> <span class="pre">-n</span> <span class="pre">3</span></code></p>
 <p>This design will be placed in a new folder, <code class="docutils literal notranslate"><span class="pre">02_designs/outputs/</span></code>.</p>
-<p><strong>How do these designs score compared to the other designs found by flexible backbone and layered design in your group? Why did we use the flexible backbone procedure here, even though we know the sequence is functional? What does this demonstrate about scoring and sampling in Rosetta?</strong></p>
+<p><strong>How do these designs score compared to the other designs found by flexible backbone and layered design in your group? Why did we use the flexible backbone procedure here, even though we know the sequence is functional? What do the demonstrate about scoring and sampling in Rosetta?</strong></p>
 </div>
 </div>
 
