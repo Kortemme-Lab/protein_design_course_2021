@@ -1,6 +1,6 @@
 # Additional Readings
 
-Here are references and links for the paper discussions
+Here are references and links for optional readings that supplement the course's lectures and exercises. 
 
 ## Week 1
 Session 1.1 (Mar 29): Introduction to course, topics, and projects
