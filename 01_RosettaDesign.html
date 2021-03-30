@@ -280,7 +280,7 @@
                 
   <div class="section" id="rosetta-design">
 <h1>Rosetta Design<a class="headerlink" href="#rosetta-design" title="Permalink to this headline">¶</a></h1>
-<p>In this exercise we’ll be designing some core residues of the Lambda Repressor-Operator complex to examine whether alternate packing arrangements are possible. We will start out with some fixed-backbone design on seven core residues, then move onto flexible-backbone and finally flexible-backbone with layered design. Then, in teams, you will generate a few models from each of these protocols, and compare your sequences to the results of an experimental mutagenesis selection from Lim, et al (1989) (<a class="reference external" href="https://www.nature.com/articles/339031a0.pdf">https://www.nature.com/articles/339031a0.pdf</a>).</p>
+<p>In this exercise we’ll be designing some core residues of the Lambda Repressor-Operator complex to examine whether alternate packing arrangements are possible. We will start out with some fixed-backbone design on seven core residues, then move onto flexible-backbone and finally flexible-backbone with layered design. Then, in teams, you will generate a few models from each of these protocols, and compare your sequences to the results of an experimental mutagenesis selection from Lim &amp; Sauer (1989) (<a class="reference external" href="https://www.nature.com/articles/339031a0.pdf">https://www.nature.com/articles/339031a0.pdf</a>).</p>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
 <p>Before we do anything, update RosEasy:</p>
@@ -1444,7 +1444,7 @@ protocols.denovo_design.movers.FastDesign: {0}
 <ul class="simple">
 <li><p>Fixed-backbone design: Runs design without backbone degrees of freedom.</p></li>
 <li><p>Fastdesign: Runs design with backbone degrees of freedom. To limit the amount of computational resources required, we will only allow backbone degrees of freedom for designed or repacked residues.</p></li>
-<li><p>Layerdesign: Runs flexible backbone design while limiting allowable residues, depending on how solvent-accessible those positions are.</p></li>
+<li><p>Layerdesign: Runs flexible backbone design while limiting allowable residues based on how solvent-accessible those positions are. E.g., solvent-accessible positions will be limited to polar residues, while buried positions will be limited to hydrophobic residues.</p></li>
 </ul>
 <p>Cancel out of the Jupyter session and then type one of the following commands from your workspace’s root directory. Have each person in your group run a different command; if necessary, double up on the layerdesign command.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy submit . standard_params/fixbb.py -l -n <span class="m">10</span>
@@ -1482,7 +1482,7 @@ roseasy submit . standard_params/layerdesign.py -l -n <span class="m">5</span>
 <p>Run a few flexible backbone simulations using the new resfile (if you have time, increase the number of simulations):</p>
 <p><code class="docutils literal notranslate"><span class="pre">roseasy</span> <span class="pre">submit</span> <span class="pre">.</span> <span class="pre">standard_params/fastdesign.py</span> <span class="pre">-l</span> <span class="pre">-n</span> <span class="pre">3</span></code></p>
 <p>This design will be placed in a new folder, <code class="docutils literal notranslate"><span class="pre">02_designs/outputs/</span></code>.</p>
-<p><strong>How do these designs score compared to the other designs found by flexible backbone and layered design in your group? Why did we use the flexible backbone procedure here, even though we know the sequence is functional? What do the demonstrate about scoring and sampling in Rosetta?</strong></p>
+<p><strong>Why did we use the flexible backbone procedure here, even though we know the sequence is functional? How do these designs score compared to the other designs found by flexible backbone and layered design in your group? What do these results demonstrate about scoring and sampling in Rosetta?</strong></p>
 </div>
 </div>
 
