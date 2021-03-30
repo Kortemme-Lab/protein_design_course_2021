@@ -290,7 +290,7 @@ git pull
 <span class="nb">cd</span> ..
 </pre></div>
 </div>
-<p>Now activate your <code class="docutils literal notranslate"><span class="pre">protiendesign</span></code> environemnt, clone a GitHub repository containing our input files.</p>
+<p>Now activate your <code class="docutils literal notranslate"><span class="pre">protiendesign</span></code> environemnt and clone a GitHub repository containing our input files.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate proteindesign
 git clone https://github.com/Kortemme-Lab/protein_design_course_files.git
 </pre></div>
@@ -315,14 +315,21 @@ git clone https://github.com/Kortemme-Lab/protein_design_course_files.git
 </div>
 <div class="section" id="interacting-with-pyrosetta">
 <h2>Interacting with PyRosetta<a class="headerlink" href="#interacting-with-pyrosetta" title="Permalink to this headline">¶</a></h2>
-<p>We’ll do the first part of the exercise in a Jupyter notebook. Install Jupyter with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">jupyter</span></code>, then enter the command <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>, and in the browser window that opens, click <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">&gt;</span> <span class="pre">Python3</span></code>.</p>
+<p>We’ll do the first part of the exercise in a Jupyter notebook.</p>
+<p>Install Jupyter with <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">jupyter</span></code>.</p>
+<p>You can download the notebook file used to create this page and follow along. To do so, download the notebook to your workspace’s root directory (<code class="docutils literal notranslate"><span class="pre">design_exercise</span></code>; you should already be in this folder) and run Jupyter notebook.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O https://raw.githubusercontent.com/Kortemme-Lab/protein_design_course_2021/main/course_website/01_RosettaDesign.ipynb
+jupyter notebook
+</pre></div>
+</div>
+<p>In the browser window that opens, click on <code class="docutils literal notranslate"><span class="pre">01_RosettaDesign.ipynb</span></code>.</p>
 <p>In the Jupyter notebook, start with some PyRosetta setup. Before you run any other PyRosetta commands, you must run an init() command. It takes a string of options as an argument. The options we will be using are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-ex1</span></code> - Turns on one level of extra rotamers for more precise packing.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-ex2</span></code> - Turns on a second level of extra rotamers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-use_input_sc</span></code> - Adds the rotamers from the input structure to the rotamer set.</p></li>
 </ul>
-<p>Copy the following into a notebook cell and execute it with &lt;shift&gt; + &lt;enter&gt;.</p>
+<p>Copy the following into a notebook cell if necessary, and execute it with &lt;shift&gt; + &lt;enter&gt;.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyrosetta</span> <span class="kn">import</span> <span class="n">rosetta</span><span class="p">,</span> <span class="n">init</span><span class="p">,</span> <span class="n">pose_from_file</span><span class="p">,</span> <span class="n">create_score_function</span>
@@ -434,7 +441,7 @@ core.pack.dunbrack.RotamerLibrary: {0} Dunbrack 2010 library took 0.250039 secon
 <div class="section" id="fixed-backbone-design">
 <h2>Fixed-backbone design<a class="headerlink" href="#fixed-backbone-design" title="Permalink to this headline">¶</a></h2>
 <p>Next, let’s set up a task factory and movemap for our design run. The TaskFactory will read the resfile we give it, telling Rosetta which positions are allowed to mutate (and to which residue types), which positions are allowed to repack but not mutate, and which positions are not allowed to move at all during packing operations.</p>
-<p>The MoveMap tells certain Rosetta protocols which positions are allowed to move their backbone and sidechain degrees of freedom. In this case, the minimization step of the Relax protocol will use the MoveMap to determine which degrees of freedom are to be minimized.</p>
+<p>The MoveMap tells certain Rosetta protocols which positions are allowed to move their backbone and sidechain degrees of freedom. In this case, the minimization step of the FastDesign protocol will use the MoveMap to determine which degrees of freedom are to be minimized.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyrosetta.rosetta.core.pack.task.operation</span> <span class="kn">import</span> <span class="n">ReadResfile</span>
@@ -503,18 +510,18 @@ protocols.relax.RelaxScriptManager: {0} endrepeat
 </div>
 </div>
 <p>In PyMOL, let’s color the residues that we will be designing.<br />
-Make a selection by entering the following command:<br />
+Make a selection by entering the following command in PyMOL’s command line:<br />
 <code class="docutils literal notranslate"><span class="pre">sele</span> <span class="pre">designable,</span> <span class="pre">(resi</span> <span class="pre">13</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">31</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">35</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">42</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">46</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">52</span> <span class="pre">or</span> <span class="pre">resi</span> <span class="pre">60)</span> <span class="pre">and</span> <span class="pre">chain</span> <span class="pre">A</span></code><br />
 Show them in stick form:<br />
 <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">sticks,</span> <span class="pre">designable</span></code><br />
-Hide hydrogens:
+Hide hydrogens:<br />
 <code class="docutils literal notranslate"><span class="pre">hide</span> <span class="pre">everything,</span> <span class="pre">hydro</span></code><br />
 Color the selected carbon atoms orange:<br />
 <code class="docutils literal notranslate"><span class="pre">color</span> <span class="pre">orange,</span> <span class="pre">designable</span> <span class="pre">and</span> <span class="pre">name</span> <span class="pre">c*</span></code></p>
 <p>Now we are ready to apply the mover and watch what happens.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the mover and observ in PyMOL</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the mover and observe in PyMOL</span>
 <span class="n">fd</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
 </pre></div>
 </div>
