@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accessing the course &#8212; Computational Protein Design Minicourse</title>
+    <title>Ligand Binding Site Design Exercise &#8212; Computational Protein Design Minicourse</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,8 +54,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Additional Readings" href="papers.html" />
-    <link rel="prev" title="Getting started with PyRosetta and PyMOL" href="00_getting_started_with_rosetta.html" />
+    <link rel="next" title="Installing Course Prerequisites" href="installation_instructions.html" />
+    <link rel="prev" title="Homepage" href="_intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -103,8 +103,8 @@
    Homepage
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_LigandDesign.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Ligand Binding Site Design Exercise
   </a>
  </li>
@@ -123,8 +123,8 @@
    Getting started with PyRosetta and PyMOL
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="accessing_the_course.html">
    Accessing the course
   </a>
  </li>
@@ -178,7 +178,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/accessing_the_course.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/02_LigandDesign.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -210,18 +210,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#zoom">
-   Zoom
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gather">
-   Gather
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#slack">
-   Slack
+  <a class="reference internal nav-link" href="#setup">
+   Setup
   </a>
  </li>
 </ul>
@@ -236,35 +226,54 @@
         
               <div>
                 
-  <div class="section" id="accessing-the-course">
-<h1>Accessing the course<a class="headerlink" href="#accessing-the-course" title="Permalink to this headline">¶</a></h1>
-<p>Below you will find detailed instructions for accessing the various online platforms that will host our course.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>These sessions and workspaces are password-protected, using the same password provided for PyRosetta download.</p>
+  <div class="section" id="ligand-binding-site-design-exercise">
+<h1>Ligand Binding Site Design Exercise<a class="headerlink" href="#ligand-binding-site-design-exercise" title="Permalink to this headline">¶</a></h1>
+<p>In this exercise, we will (re-)design a ligand binding site in the context of an existing protein. Our test system is Flavodoxin (PDB: 1f4p), which binds the co-factor flavin mononucleotide (FMN).</p>
+<p>You will be starting from a hypothetical mutant we generated computationally, in which the residues of the natural binding site are all mutated to Alanine. Here, the binding site environment is essentially defined as all residues within 6 Å of the ligand (with some exceptions). In the resfile,these positions are set to be ‘designable’ (i.e. the identity of the amino acid residues is allowed to vary during the protocol). In addition, to stabilize the binding site environment, residues within 8 Å of the ligand are allowed to ‘repack’ (i.e. different rotamers for the pre-existing residue are sampled during the protocol).</p>
+<p>After designing a synthetic binding site using Rosetta, you will analyze the type of interactions between the redesigned protein and its ligand. You will also compare it to the original binding site of the natural protein. Finally, you will compare the results of your design runs with the most prevalent residues for the designed positions in different Flavodoxin sequences.</p>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>The files for this exercise are found at <a class="reference external" href="https://github.com/Kortemme-Lab/protein_design_course_files/ligand_exercise">https://github.com/Kortemme-Lab/protein_design_course_files/ligand_exercise</a></p>
+<p>If you have already git installed this repository, please update it with</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/protein_design_course_files
+git pull
+<span class="nb">cd</span> ddg_exercise
+</pre></div>
 </div>
-<div class="section" id="zoom">
-<h2>Zoom<a class="headerlink" href="#zoom" title="Permalink to this headline">¶</a></h2>
-<p>Zoom is our video conferencing app, where we will meet for our daily lecture, discussions, and for introducing the practical exercises.</p>
-<ul class="simple">
-<li><p>Zoom ID: 9772480758</p></li>
-<li><p>public link:  <a class="reference external" href="https://ucsf.zoom.us/j/97724860758">https://ucsf.zoom.us/j/97724860758</a></p></li>
-</ul>
+<p>Start by setting up a Roseasy workspace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy setup ligand_exercise
+</pre></div>
 </div>
-<div class="section" id="gather">
-<h2>Gather<a class="headerlink" href="#gather" title="Permalink to this headline">¶</a></h2>
-<p>Gather is a video-calling app for your browser or desktop that provides a workspace for entering and exiting individual or group conversations, initiated by walking around a virtual floorplan with an avatar. TAs will be on Gather to field questions on the practical exercises during course hours.</p>
-<ul class="simple">
-<li><p>Link for our space: <a class="reference external" href="https://gather.town/app/tFK4OwS5qLaqUE5z/protein_design_minicourse">https://gather.town/app/tFK4OwS5qLaqUE5z/protein_design_minicourse</a></p></li>
-<li><p>Some instructions on using Gather: <a class="reference external" href="https://support.gather.town/help/movement-and-basics">https://support.gather.town/help/movement-and-basics</a></p></li>
-</ul>
+<p>In addition to specifying the path to the input pdb file, resfile and python binary, here, you will also need to provide the path to a ‘params’ file for the ligand. This file parameterizes the ligand, which is necessary for Rosetta to handle it correctly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;input&gt; protein_design_course_files/ligand_exercise/1f4p_input.pdb
+&lt;input&gt; protein_design_course_files/ligand_exercise/resfile
+&lt;input&gt; protein_design_course_files/ligand_exercise/FMN.params
+</pre></div>
 </div>
-<div class="section" id="slack">
-<h2>Slack<a class="headerlink" href="#slack" title="Permalink to this headline">¶</a></h2>
-<p>Slack is a messaging app for your browser or desktop. You should have received an invite to the workplace from the TAs. We hope you find Slack useful for co-ordinating the group project work. If you’d like to reach the TAs outside of course hours, they will do their best to respond to pings on Slack in a timely fashion!</p>
-<ul class="simple">
-<li><p>Link for our space: <a class="reference external" href="https://bp219-protein-design.slack.com">https://bp219-protein-design.slack.com</a></p></li>
-</ul>
+<p>Next, cd into the workspace’s root directory and submit the design runs:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ligand_exercise
+roseasy submit . standard_params/ligand_fastdesign.py -l -n <span class="m">5</span>
+</pre></div>
+</div>
+<p>Once finished, plot the results based on the designs’ energies. You may also like to compare other metrics of the designs in a table.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy plot 01_designs/outputs
+roseasy make_table 01_designs
+</pre></div>
+</div>
+<p>Compare your designs to the input structure containing the Alanine-pocket. To do so, right-click on a point and select ‘compare_to_input’ in the graph generated by the plot command.
+In the PyMOL session that opens, you can type ‘ww’ in the PyMOL terminal to cycle through mutations.</p>
+<p><strong>By visual inspection, does the ligand appear to be properly accommodated in the binding pocket?</strong></p>
+<p><strong>Which types of interactions participate in binding of the ligand? How do these vary between the different designs?</strong></p>
+<p>Next, compare the computationally designed binding sites to the natural binding site of the (non-mutated) Flavodoxin input. To do so, open the relaxed pdb file ‘1f4p_r.pdb’ (which you can find in the protein_design_course_files/ligand_exercise directory), in PyMOL. If you load it into the same PyMOL session as the design, you can again cycle through mutations by entering the following in the PyMOL terminal.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wt_vs_mut</span> <span class="mi">1</span><span class="n">f4p_r</span><span class="p">,</span> <span class="n">design_input_00X</span>
+</pre></div>
+</div>
+<p>Note:
+The protein in the PDB file you will be starting with (1f4p_prmrr.pdb) was mutated, relaxed and renumbered (for Rosetta; starting at 1) by us. Therefore, position 1 in this file corresponds to position 2 in the non-mutated PDB file (1f4p_pr.pdb) and the sequence logo in Ollikainen et al., PLOS Computational Biology, 2015.</p>
+<p><strong>How do the natural and synthetic binding sites compare? Are residues of the natural binding site recapitulated in the designed one?</strong></p>
+<p><strong>If the precise identity of amino acids differs, are the types of interactions recapitulated, e.g. hydrogen bonds, hydrophobic interactions, etc.? Which alternative interactions may have arisen during design?</strong></p>
+<p><strong>Moreover, how do the residues found in the designed binding sites compare to frequently occurring residues in different Flavodoxin binding site sequences? To address this, you can find a ‘sequence logo’ in <a class="reference external" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004335">this paper</a> by Ollikainen et al., PLOS Computational Biology, 2015 (Fig. 7).</strong></p>
+<p><strong>More broadly, do you suppose that a ‘native’ binding site for a particular ligand (i.e. a small-molecule binding site found in a protein structure in the PDB) can be regarded as a ‘gold standard’ for a binding site for this ligand?</strong></p>
 </div>
 </div>
 
@@ -293,8 +302,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="00_getting_started_with_rosetta.html" title="previous page">Getting started with PyRosetta and PyMOL</a>
-    <a class='right-next' id="next-link" href="papers.html" title="next page">Additional Readings</a>
+    <a class='left-prev' id="prev-link" href="_intro.html" title="previous page">Homepage</a>
+    <a class='right-next' id="next-link" href="installation_instructions.html" title="next page">Installing Course Prerequisites</a>
 
         </div>
         
