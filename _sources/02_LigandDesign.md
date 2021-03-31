@@ -26,7 +26,7 @@ Start by setting up a Roseasy workspace:
 roseasy setup ligand_exercise
 ```
 
-In addition to specifying the path to the input pdb file, resfile and python binary, here, you will also need to provide the path to a ‘params’ file for the ligand. This file parameterizes the ligand, which is necessary for Rosetta to handle it correctly.
+In addition to specifying the path to the input pdb file, resfile and python binary, here, you will also need to provide the path to a ‘params’ file for the ligand. This file parameterizes the ligand, which is necessary for Rosetta to handle it correctly. As with the previous exercise, you can ignore RosEasy's request for a `loops` file (just hit \<enter\>).
 
 ```bash
 <input> protein_design_course_files/ligand_exercise/1f4p_input.pdb
