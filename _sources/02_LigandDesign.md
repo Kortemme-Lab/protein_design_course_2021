@@ -17,7 +17,7 @@ If you have already git installed this repository, please update it with
 ```bash
 cd /path/to/protein_design_course_files
 git pull
-cd ddg_exercise
+cd ..
 ```
 
 Start by setting up a Roseasy workspace:
