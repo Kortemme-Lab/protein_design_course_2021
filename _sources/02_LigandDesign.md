@@ -10,7 +10,7 @@ After designing a synthetic binding site using Rosetta, you will analyze the typ
 
 ### Setup
 
-The files for this exercise are found at https://github.com/Kortemme-Lab/protein_design_course_files/ligand_exercise
+The files for this exercise are found at https://github.com/Kortemme-Lab/protein_design_course_files/tree/master/ligand_exercise
 
 If you have already git installed this repository, please update it with
 
