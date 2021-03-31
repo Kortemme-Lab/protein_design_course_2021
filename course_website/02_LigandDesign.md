@@ -30,6 +30,7 @@ In addition to specifying the path to the input pdb file, resfile and python bin
 
 ```bash
 <input> protein_design_course_files/ligand_exercise/1f4p_input.pdb
+<input> /path/to/anaconda/envs/proteindesign/bin/python
 <input> protein_design_course_files/ligand_exercise/resfile
 <input> protein_design_course_files/ligand_exercise/FMN.params
 ```
