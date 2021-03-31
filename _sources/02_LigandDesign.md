@@ -55,10 +55,10 @@ In the PyMOL session that opens, you can type ‘ww’ in the PyMOL terminal to 
 
 **Which types of interactions participate in binding of the ligand? How do these vary between the different designs?**
 
-Next, compare the computationally designed binding sites to the natural binding site of the (non-mutated) Flavodoxin input. To do so, open the relaxed pdb file ‘1f4p_r.pdb’ (which you can find in the protein_design_course_files/ligand_exercise directory), in PyMOL. If you load it into the same PyMOL session as the design, you can again cycle through mutations by entering the following in the PyMOL terminal.
+Next, compare the computationally designed binding sites to the natural binding site of the (non-mutated) Flavodoxin input. To do so, open the relaxed pdb file ‘1f4p_wt_r.pdb’ (which you can find in the protein_design_course_files/ligand_exercise directory), in PyMOL. If you load it into the same PyMOL session as the design, you can again cycle through mutations by entering the following in the PyMOL terminal.
 
 ```
-wt_vs_mut 1f4p_r, design_input_00X
+wt_vs_mut 1f4p_wt_r, design_input_00X
 ```
 
 Note:
