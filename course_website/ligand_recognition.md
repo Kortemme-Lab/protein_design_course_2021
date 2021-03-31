@@ -1,3 +1,0 @@
-# Ligand Recognition
-
-Coming soon
