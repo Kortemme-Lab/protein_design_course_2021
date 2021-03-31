@@ -23,6 +23,7 @@ cd ..
 Start by setting up a Roseasy workspace:
 
 ```bash
+conda activate proteindesign
 roseasy setup ligand_exercise
 ```
 
