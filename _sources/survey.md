@@ -1,6 +1,6 @@
 # Survey for choosing projects
 
-Please fill out the form at this link:
+Please fill out the form at this link ***by end of day, Thursday, April 1***:
 
 https://forms.gle/8RtqZDeKc1jezk7VA
 
