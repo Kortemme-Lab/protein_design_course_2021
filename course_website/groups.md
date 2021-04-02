@@ -12,6 +12,8 @@ The slides introducing each project can be found in the Lectures Box folder at: 
     - Ben Orr
     - TA: Chris Mathy
 
+Meeting place: sidechain salon
+
 2. Optimize a ligand binding site to control gene expression in mammalian cells,
     - Dominic Grisingher
     - Sunny Choi
@@ -19,6 +21,8 @@ The slides introducing each project can be found in the Lectures Box folder at: 
     - Mai Nobuhara
     - Simone Harrison
     - TA: Simon Kretschmer
+
+Meeting place: peptide parlor
 
 3. De novo design: Design a complete protein with a new shape from scratch using an established method (LUCS), and explore designing a de novo ligand binding site.
     - Cole Bracken
@@ -28,3 +32,4 @@ The slides introducing each project can be found in the Lectures Box folder at: 
     - Rian Kormos
     - TA: Cody Krivacic
 
+Meeting place: de novo dwelling
