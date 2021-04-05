@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Structure Prediction &#8212; Computational Protein Design Minicourse</title>
+    
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Course Schedule" href="schedule.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Computational Protein Design Minicourse</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00_getting_started_with_rosetta.html">
+   Getting started with PyRosetta and PyMOL
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_RosettaDesign.html">
+   Rosetta Design
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_LigandDesign.html">
+   Ligand Binding Site Design Exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="_intro.html">
+   Homepage
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="accessing_the_course.html">
+   Accessing the course
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ddg_exercise.html">
+   ΔΔG Exercise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="groups.html">
+   Project Info
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="installation_instructions.html">
+   Installing Course Prerequisites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="papers.html">
+   Relevant Publications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="schedule.html">
+   Course Schedule
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Structure Prediction
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/trRosetta_exercise.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conceptual-overview">
+   Conceptual overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fragment-based-folding-abinitio">
+     Fragment-based folding: AbInitio
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#machine-learning-based-folding-trrosetta">
+     Machine learning-based folding: trRosetta
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-exercise-questions">
+   Pre-exercise questions:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-case">
+   Simple case:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#potentially-difficult-cases">
+   Potentially difficult cases:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-to-alphafold2">
+   Comparing to AlphaFold2:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#post-exercise-questions">
+   Post-exercise questions:
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="structure-prediction">
+<h1>Structure Prediction<a class="headerlink" href="#structure-prediction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="conceptual-overview">
+<h2>Conceptual overview<a class="headerlink" href="#conceptual-overview" title="Permalink to this headline">¶</a></h2>
+<p>Any protein folding algorithm requires:</p>
+<ol class="simple">
+<li><p>Search strategy: some way to generate candidate structures (decoys)</p></li>
+<li><p>Scoring function: discriminate near-native structures from the others</p></li>
+</ol>
+<div class="section" id="fragment-based-folding-abinitio">
+<h3>Fragment-based folding: AbInitio<a class="headerlink" href="#fragment-based-folding-abinitio" title="Permalink to this headline">¶</a></h3>
+<p>* Adapted from PyRosetta BootCamp 2021</p>
+<p>How does traditional fragment-based folding work in Rosetta?</p>
+<ol class="simple">
+<li><p>For each n-length fragment in your design (take sliding window of length n), generate a list of potential backbone geometries that the fragment may adopt. Rosetta does this by finding pieces of protein structures from the PDB similar in sequence and stores the corresponding torsion angles in a file, typically for 9-/3-mers.</p></li>
+<li><p>Starting from a fully extended chain, randomly replace the torsion angles for a stretch of n residues with a set from the fragment library file (Monte Carlo sampling w/ Metropolis Criterion)</p></li>
+</ol>
+<p>There are many other details you can read about <a class="reference external" href="https://new.rosettacommons.org/docs/latest/application_documentation/structure_prediction/abinitio">here</a>. A design that is likely to fold well into a given structure would result in low RMSD decoys having low energy while high RMSD decoys have high energy (i.e. the desired structure is indeed the lowest energy conformation for the designed sequence). This is commonly referred to as a folding funnel.</p>
+<p><img alt="folding_funnel" src="https://miro.medium.com/max/7334/1*tpZtrx8ZziiTljtQyW4Zmg.png" /></p>
+<p>To see a video of ubiquitin folding via fragment-based methods:</p>
+<p align="center">
+<a href="https://www.youtube.com/watch?v=TT4syxsh_AU&t=1s" target="_blank"><img src="http://img.youtube.com/vi/TT4syxsh_AU/0.jpg" /></a>
+</p>
+<p>Some disadvantages of fragment-based methods:</p>
+<ol class="simple">
+<li><p>Stochastic nature requires generation of a large number of decoys to sample structure space (typically 20k-100k decoys - computationally expensive!) –&gt; the algorithm only works well typically for proteins up to 100 amino acids</p></li>
+<li><p>Success of folding limited by quality of fragments generated. What should we consider when generating fragments? Just sequence? Secondary-structure? Solvent-accessibility? Position in the sequence? What if the protein is dynamic?</p></li>
+</ol>
+</div>
+<div class="section" id="machine-learning-based-folding-trrosetta">
+<h3>Machine learning-based folding: trRosetta<a class="headerlink" href="#machine-learning-based-folding-trrosetta" title="Permalink to this headline">¶</a></h3>
+<p>How does transform-restrained Rosetta (trRosetta) work? Keep in mind the overall process of modeling. First you want to generate your input features based on domain-knowledge/exploratory data analysis (e.g. perhaps you’d like to transform your data prior to feeding it into your model or use it to generate new features), train your model to minimize a loss function, and use your model to predict outputs (structures) based on new inputs (sequences).</p>
+<ol class="simple">
+<li><p>Generate input features. Can be as simple as a single sequence or could include a multi-sequence alignment (coevolutionary coupling features) and/or homologous templates.</p></li>
+<li><p>Feed input through pre-trained deep neural network (trained on non-redundant protein set from PDB)</p></li>
+<li><p>The model will estimate likelihood of inter-residue distances/orientations</p></li>
+<li><p>Probabilities converted into smoothed inter-residue restraints</p></li>
+<li><p>Generate coarse-grained models via minimization (e.g. gradient descent, BFGS, etc.) in Rosetta</p></li>
+<li><p>Refine with full-atom relax</p></li>
+</ol>
+<p><img alt="trrosetta" src="https://yanglab.nankai.edu.cn/trRosetta/help/fig1.png" />
+<img alt="coevolution" src="https://i1.wp.com/www.blopig.com/blog/wp-content/uploads/2020/12/image-8.png?resize=768%2C297&amp;ssl=1" /></p>
+<p>This method does not rely on fragments and can also work for de novo designs! The success of this method is dependent on how well the model has learned fundamental sequence-structure relationships. For more details, please see the primary publication <a class="reference external" href="https://www.pnas.org/content/117/3/1496">here</a>.</p>
+</div>
+</div>
+<div class="section" id="pre-exercise-questions">
+<h2>Pre-exercise questions:<a class="headerlink" href="#pre-exercise-questions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>What are some potential properties of a given protein that may make structure prediction difficult?</p></li>
+<li><p>Would you expect the trRosetta algorithm to perform well on de novo protein designs when it has been trained predominantly on natural proteins?</p></li>
+</ol>
+<p>For the following exercises, before looking at the trRosetta result, take a look at the structure of the protein(s) in question. Skim through the associated primary publication if given to get an idea of how the protein behaves in real life (i.e. not as a static crystal structure). Try to guess what the trRosetta result might be and build your intuition! After doing so, you can check to see how accurate the prediction was by downloading the model and aligning it to the PDB structure in PyMOL.</p>
+<p>All results were generated with MSA + homologous templates unless explicitly stated otherwise.</p>
+</div>
+<div class="section" id="simple-case">
+<h2>Simple case:<a class="headerlink" href="#simple-case" title="Permalink to this headline">¶</a></h2>
+<p>Calbindin (PDB ID: 1D1O)
+<a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR040039/">trRosetta result</a></p>
+<ul class="simple">
+<li><p>Monomeric, well-packed, many homologous proteins available</p></li>
+</ul>
+</div>
+<div class="section" id="potentially-difficult-cases">
+<h2>Potentially difficult cases:<a class="headerlink" href="#potentially-difficult-cases" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Two topologies separated by a point mutation <a class="reference external" href="https://www.pnas.org/content/106/50/21149">source</a></p></li>
+</ol>
+<ul class="simple">
+<li><p>IgG-binding (PDB ID: 2LHC) <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR035112/">trRosetta result</a></p></li>
+<li><p>Albumin-binding (PDB ID: 2LHD) <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR035114/">MSA + templates result</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR040173/">single sequence + templates result</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR040175/">single sequence + no templates result</a></p></li>
+</ul>
+<ol class="simple">
+<li><p>Fold switch XCL1 (PDB ID: 2JP1, 1J9O) <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acschembio.8b00276">source</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR035121/">trRosetta result</a></p></li>
+<li><p>De novo folds</p></li>
+</ol>
+<ul class="simple">
+<li><p>Ideal de novo Rossmann-like fold (PDB ID: 2LV8) <a class="reference external" href="https://www.nature.com/articles/nature11600">source</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR035133/">trRosetta result</a></p></li>
+<li><p>Redesigned de novo fold (PDB ID: 6VG7) <a class="reference external" href="https://science.sciencemag.org/content/369/6507/1132">source</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR035135/">trRosetta result</a></p></li>
+</ul>
+</div>
+<div class="section" id="comparing-to-alphafold2">
+<h2>Comparing to AlphaFold2:<a class="headerlink" href="#comparing-to-alphafold2" title="Permalink to this headline">¶</a></h2>
+<p>You may have heard about the most recent CASP winner AlphaFold2 inspired which also uses machine learning to predict protein structure (getting about 90% of C-alpha atoms within a defined distance cutoff of the target structure for 2/3 of the targets). You can read an opinion article about AlphaFold (how well it performed, how it works, etc.) <a class="reference external" href="https://www.blopig.com/blog/2020/12/casp14-what-google-deepminds-alphafold-2-really-achieved-and-what-it-means-for-protein-folding-biology-and-bioinformatics/">here</a>. Instead of predicting constraints, the algorithm actually outputs a full structure at the end. Since it is not currently open-source, we will be comparing the AF2 published structure for CoV protein 3a against trRosetta + experiment.</p>
+<p>Protein 3a (PDB ID: 6XDC) <a class="reference external" href="https://www.biorxiv.org/content/10.1101/2020.06.17.156554v1.full.pdf">source 1</a>, <a class="reference external" href="https://deepmind.com/research/open-source/computational-predictions-of-protein-structures-associated-with-COVID-19">source 2</a>, <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/output/TR040044/">trRosetta result</a></p>
+<p>You may find it helpful to look at the C-terminal and N-terminal domains separately.</p>
+</div>
+<div class="section" id="post-exercise-questions">
+<h2>Post-exercise questions:<a class="headerlink" href="#post-exercise-questions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Is trRosetta able to capture the structural effects of single point mutations?</p></li>
+<li><p>How does the type of input (MSA vs. single sequence, template vs. no template) affect trRosetta output? Does including more features lead to better predictions?</p></li>
+<li><p>Is trRosetta able to produce models capturing multiple folds for dynamic proteins?</p></li>
+<li><p>Which example had the sharpest contact map? Why might that be the case?</p></li>
+<li><p>How does the trRosetta prediction compare to that of AF2 for CoV protein 3a? Why might the N-terminal domain be poorly predicted?</p></li>
+<li><p>Within your groups, find a protein you are interested in and submit it to the trRosetta <a class="reference external" href="https://yanglab.nankai.edu.cn/trRosetta/">server</a> for discussion next class.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="schedule.html" title="previous page">Course Schedule</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Kortemme Lab<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
