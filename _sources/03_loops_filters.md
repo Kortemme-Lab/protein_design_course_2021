@@ -117,7 +117,7 @@ Metrics under "threshold" tell RosEasy to throw out any designs that do not meet
 
 ![Metric names](images/metric_names.png)
 
-Note that in order for a metric to be included in a Pareto front, RosEasy must know whether higher scores or lower scores are better. Normally it detects this via naming conventions, but because these designs were created using another workflow, we have to specify these directions ourselves. For each of your metrics, determine whether higher scores (`+`) or lower scores (`-`) are "better". Then, open `04_designs/outputs/metrics.yml` and locate your metric name. The line above the metric name should say `- dir: '-'`, indicating that RosEasy thinks lower values are better for this metric. If higher values are better for any of your metrics, change that to `-dir: '+'` and save the file.
+Note that in order for a metric to be included in a Pareto front, RosEasy must know whether higher scores or lower scores are better. Normally it detects this via naming conventions, but because these designs were created using another workflow, we have to specify these directions ourselves. For each of your metrics, determine whether higher scores (`+`) or lower scores (`-`) are "better". Then, open `04_designs/outputs/metrics.yml` and locate your metric name. The line above the metric name should say  `- dir: '-'`, indicating that RosEasy thinks lower values are better for this metric. If higher values are better for any of your metrics, change that to  `- dir: '+'` and save the file.
 
 Make a file with the above formatting (do not include thresholds) and name it `picks.yml`. 
 
