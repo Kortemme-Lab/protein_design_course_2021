@@ -72,6 +72,7 @@ Note that at any time, you can right-click on a point and select ‘open in pymo
 Set the y-axis to display the `stability score`. **This score represents the experimental results for that design sequence; higher is better.**
 Examine the relationship between stability and a variety of metrics by cycling through different x-axis metrics, making sure to look at the following:
 - `Total score`
+- `normalized_score` (Rosetta score divided by design length) 
 - `buried_np` (buried nonpolar surface area)
 - `unsat_hbond` (# of buried unsatisfied hydrogen bonds)
 - `exposed_hydrophobics` (surface area of exposed hydrophobic residues)
@@ -137,4 +138,4 @@ You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on t
 
 **If at any point you need to start over, you can either delete the `05_validated_designs` folder (`rm -r 05_validated_designs/`) or increment the number in the `picks` command (`roseasy pick . 6 picks.yml`). The latter will create additional folders (in this case `06_validated_designs/`) so your plotting command will change as well.**
 
-**Did your chosen metrics select for stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
+**Did your chosen metrics select for stable designs? Are you missing out on some stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
