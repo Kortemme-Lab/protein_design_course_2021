@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Computational Protein Design Minicourse</title>
+    <title>Loop Modeling &amp; Filters Exercise &#8212; Computational Protein Design Minicourse</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -52,8 +52,10 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="#" />
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Homepage" href="_intro.html" />
+    <link rel="prev" title="Ligand Binding Site Design Exercise" href="02_LigandDesign.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -90,7 +92,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="01_RosettaDesign.html">
    Rosetta Design
@@ -101,8 +103,8 @@
    Ligand Binding Site Design Exercise
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_loops_filters.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Loop Modeling &amp; Filters Exercise
   </a>
  </li>
@@ -178,6 +180,23 @@
             </button>
             
             
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/03_loops_filters.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
             <!-- Source interaction buttons -->
 
 
@@ -202,19 +221,69 @@
         
               <div>
                 
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="loop-modeling-filters-exercise">
+<h1>Loop Modeling &amp; Filters Exercise<a class="headerlink" href="#loop-modeling-filters-exercise" title="Permalink to this headline">¶</a></h1>
+<p>In this exercise, we will take a look at some results from a few different loop modeling simulations of the adenine-recognition loop in guanylate kinase (residues 167-186).</p>
+<p>Download the prepared RosEasy workspace and unzip its contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O &lt;url coming soon&gt;
+tar -xzvf loop_modeling.tar.gz
+<span class="nb">cd</span> loop_modeling
+</pre></div>
+</div>
+<p>In this workspace are 5 folders with the outputs of various simulations.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">01_designs/</span></code> contains outputs for a FastRelax simulation, which was used to prepare the input files for the rest of the simulations. You can ignore this folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">02_validated_designs/</span></code> contains outputs from a next-generation KIC simulation (NGK). This LoopModeler protocol samples torsions from a Ramachandran distribution and closes chain breaks with KIC.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">03_validated_designs/</span></code> contains outputs from a loophash-KIC simulation (LHKIC). Here, torsions are sampled from fragments which roughly bridge a random subsegment of the loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">04_validated_designs/</span></code> contains outputs from a fragment-KIC simulation (FKIC). Torsions here are sampled from fragments which were picked, prior to running the simulation, based on their similarity to the target sequence.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">05_validated_designs/</span></code> contains outputs from a fragment-CCD simulation (CCD). Here, torsions were also sampled from fragments picked based on sequence similarity to the target sequence, but the chain breaks were closed using closed cyclic descent.</p></li>
+</ul>
+<p>Plot the outputs of the loop modeling simulations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy plot */outputs/*
+</pre></div>
+</div>
+<p>(This command will not plot the FastRelax outputs due to the way RosEasy’s output subdirectories are organized.)<br />
+On the X-axis, select “loop_rmsd”. This view plots each model’s total Rosetta score versus the model’s RMSD to the crystal structure. In structure prediction runs,
+it is desirable to see a “funneling” of points towards the low-REU, low-RMSD region of the graph; this means that, as far as Rosetta can tell within the limits of its sampling and scoring, there is an energetic
+drive towards the correct structure, with few or no viable alternative conformations.</p>
+<p>Using the pane on the left, scroll through the different protocols. <strong>Which method best predicted the loop structure?</strong></p>
+<p>You can right-click each of the points and select <code class="docutils literal notranslate"><span class="pre">compare_to_input</span></code> to view the model in PyMOL aligned with the input structure, with the remodeled portion of the loop colored in orange.<br />
+This “loop” is part beta sheet, part alpha helix, and part coil. <strong>Look through the different methods and use the <code class="docutils literal notranslate"><span class="pre">compare_to_input</span></code> feature to examine a few models from each protocol
+that scored well but had &gt;1A loop RMSDs.
+What type of secondary structure did each of the methods tend to get wrong?</strong></p>
+<p>Now change the X-axis to display <code class="docutils literal notranslate"><span class="pre">avg_9_residue_fragment_crmsd</span></code>. This is the Fragment quality metric that we discussed in class.</p>
+<p><strong>Which method(s) produce the best fragment quality? Why?</strong></p>
+<p>Change the Y-axis to display <code class="docutils literal notranslate"><span class="pre">loop_rmsd</span></code>, so that you are plotting fragment quality vs. RMSD.</p>
+<p><strong>Is there a correlation between fragment quality and loop RMSD? Does this correlation depend on which method you look at? Which methods have this correlation and why?</strong></p>
 </div>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
+    <a class='left-prev' id="prev-link" href="02_LigandDesign.html" title="previous page">Ligand Binding Site Design Exercise</a>
+    <a class='right-next' id="next-link" href="_intro.html" title="next page">Homepage</a>
 
         </div>
         
