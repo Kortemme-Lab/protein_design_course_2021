@@ -84,6 +84,36 @@ Examine the relationship between stability and a variety of metrics by cycling t
 **Does the number of buried unsatisfied hydrogen bonds correlate with stability score in this dataset? Given what we know about the energetic 
 cost of buried unsatisfied hydrogen bonds, why might that be?**
 
-**Select a metric that either seems to correlate with stability or has at least 2 distinct clusters, and examine a few structures from either extreme/both clusters in PyMOL. Can you spot any trends in what the metric is picking up on? (For some metrics it may help to enter ‘show sticks, all’ in PyMOL)**
+**Select a metric that either seems to correlate with stability or has at least 2 distinct clusters, and examine a few structures from either extreme/both clusters in PyMOL. Can you spot any trends in what the metric is picking up on? (For some metrics it may help to enter `show sticks, all` in PyMOL.)**
 
 
+### Pareto fronts (if time)
+
+Now that we have some idea of how well each metric correlates with stability, it's time to try and find some combination of metrics that gives us the greatest chance of selecting stable designs. Pareto fronts are one such way of doing this. A design is "pareto efficient", or part of a Pareto front, if there are no other designs which have better scores in all of the metrics being evaluated. You can have as many metrics be a part of a Pareto front as you wish, but as you do so, you increase the number of designs which will be considered Pareto efficient.  
+
+![Pareto fronts](images/pareto.png)
+
+We will use Pareto fronts to see if we can use the metrics that seem to correlate with stability score to further increase our chances of picking stable designs. 
+
+Pick 3-4 metrics that you think are predictive of stable designs. You are going to create a "picks" file, which tells RosEasy how to pick designs for computational validation. Picks files have the following format and should have a `.yml` extension:
+
+```
+threshold:
+- restraint_dist_e38 < 0.8
+- h_bond_to_e38_sidechain == 0
+- oversaturated_h_bonds == 0
+
+pareto:
+- total_score
+- restraint_dist_e38
+- max_9_residue_fragment_rmsd_c
+
+depth: 1
+epsilon: 0.5
+```
+
+Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI (circled in the image below). You should set `epsilon` to 0; this value is a way of tuning how many designs make it through the Pareto optimization (higher numbers means fewer designs). You may want to play around with the `depth` setting; this integer value tells RosEasy how many times to run the Pareto optimization. So if `depth` is set to 2, RosEasy will run a Pareto optimization, remove those designs from consideration, and then run a second Pareto optimization. 
+
+![Metric names](images/metric_names.png)
+
+Note that in order for a metric to be included in a Pareto front, RosEasy must know whether higher scores or lower scores are better. Normally it detects this via naming conventions, but because these designs were created using another workflow, we have to specify these directions ourselves. For each of your metrics, determine whether higher scores (`+`) or lower scores (`-`) are "better". Then, open `04_designs/outputs/metrics.yml`, locate your metric name, and edit 
