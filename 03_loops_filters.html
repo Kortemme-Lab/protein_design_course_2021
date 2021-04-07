@@ -213,6 +213,26 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loop-modeling">
+   Loop modeling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filtering">
+   Filtering
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -223,6 +243,8 @@
                 
   <div class="section" id="loop-modeling-filters-exercise">
 <h1>Loop Modeling &amp; Filters Exercise<a class="headerlink" href="#loop-modeling-filters-exercise" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="loop-modeling">
+<h2>Loop modeling<a class="headerlink" href="#loop-modeling" title="Permalink to this headline">¶</a></h2>
 <p>In this exercise, we will take a look at some results from a few different loop modeling simulations of the adenine-recognition loop in guanylate kinase (residues 167-186).</p>
 <p>Download the prepared RosEasy workspace and unzip its contents:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O &lt;url coming soon&gt;
@@ -255,6 +277,36 @@ What type of secondary structure did each of the methods tend to get wrong?</str
 <p><strong>Which method(s) produce the best fragment quality? Why?</strong></p>
 <p>Change the Y-axis to display <code class="docutils literal notranslate"><span class="pre">loop_rmsd</span></code>, so that you are plotting fragment quality vs. RMSD.</p>
 <p><strong>Is there a correlation between fragment quality and loop RMSD? Does this correlation depend on which method you look at? Which methods have this correlation and why?</strong></p>
+</div>
+<div class="section" id="filtering">
+<h2>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
+<p>The Rosetta scorefunction has limitations, both in its ability to accurately predict stability and in its applicability to specific problems. A good example is that, because all Rosetta score terms must be pairwise decomposable (summable 2-body energies) to keep simulation times fast, Rosetta can not know via a Rosetta score whether there are any buried unsatisfied hydrogen bonds, which can substantially destabilize a structure. Filters and SimpleMetrics help us to account for these limitations. Contrary to their name, filters are often used as metrics at the end of a simulation, rather than as filters that throw out designs.</p>
+<p>In this exercise, we will examine part of the dataset from the de novo protein stability paper by Gabe Rocklin et. al. The dataset we will examine consists of four rounds of design, each containing around 3,000 proteins. Designs were created using FastDesign, with each round having increasingly stringent filters and resfiles. The detailed design protocol can be found in the supplemental material: <a class="reference external" href="https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf">https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf</a></p>
+<p>First, download the dataset from <a class="reference external" href="https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4">https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4</a> to your class folder.
+Unzip the file and <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -xzvf filter_exercise.tar.gz 
+<span class="nb">cd</span> filter_exercise
+</pre></div>
+</div>
+<p>This workspace contains 4 folders, one from each round of design from the Rocklin paper. Plot all four rounds:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roseasy plot */outputs/
+</pre></div>
+</div>
+<p>Note that at any time, you can right-click on a point and select ‘open in pymol’ to view the structure in more detail. This may be helpful in explaining what filters are picking up on.</p>
+<p>Set the y-axis to display the <code class="docutils literal notranslate"><span class="pre">stability</span> <span class="pre">score</span></code>. <strong>This score represents the experimental results for that design sequence; higher is better.</strong>
+Examine the relationship between stability and a variety of metrics by cycling through different x-axis metrics, making sure to look at the following:
+<code class="docutils literal notranslate"><span class="pre">Total</span> <span class="pre">score</span></code>
+<code class="docutils literal notranslate"><span class="pre">buried_np</span></code> (buried nonpolar surface area)
+<code class="docutils literal notranslate"><span class="pre">unsat_hbond</span></code> (# of buried unsatisfied hydrogen bonds)
+<code class="docutils literal notranslate"><span class="pre">exposed_hydrophobics</span></code> (surface area of exposed hydrophobic residues)
+<code class="docutils literal notranslate"><span class="pre">pack</span></code>/<code class="docutils literal notranslate"><span class="pre">cavity_volume</span></code>/<code class="docutils literal notranslate"><span class="pre">holes</span></code> (different ways of measuring the volume of internal cavities in the protein)
+<code class="docutils literal notranslate"><span class="pre">average_fragment</span></code> (averaged backbone RMSDs of protein fragments with similar sequence to design)
+<code class="docutils literal notranslate"><span class="pre">worst_fragment</span></code> (worst backbone RMSD of fragments with similar sequence to design)</p>
+<p><strong>Which metrics seem to correlate with the stability score in earlier rounds? Is there a difference between which metrics are effective in each round?</strong></p>
+<p><strong>Does the number of buried unsatisfied hydrogen bonds correlate with stability score in this dataset? Given what we know about the energetic
+cost of buried unsatisfied hydrogen bonds, why might that be?</strong></p>
+<p><strong>Select a metric that either seems to correlate with stability or has at least 2 distinct clusters, and examine a few structures from either extreme/both clusters in PyMOL. Can you spot any trends in what the metric is picking up on? (For some metrics it may help to enter ‘show sticks, all’ in PyMOL)</strong></p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">

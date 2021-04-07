@@ -1,6 +1,8 @@
 Loop Modeling & Filters Exercise
 ===
 
+### Loop modeling
+
 In this exercise, we will take a look at some results from a few different loop modeling simulations of the adenine-recognition loop in guanylate kinase (residues 167-186).  
 
 Download the prepared RosEasy workspace and unzip its contents:
@@ -44,4 +46,44 @@ Now change the X-axis to display `avg_9_residue_fragment_crmsd`. This is the Fra
 Change the Y-axis to display `loop_rmsd`, so that you are plotting fragment quality vs. RMSD.
 
 **Is there a correlation between fragment quality and loop RMSD? Does this correlation depend on which method you look at? Which methods have this correlation and why?**
+
+
+### Filtering
+
+The Rosetta scorefunction has limitations, both in its ability to accurately predict stability and in its applicability to specific problems. A good example is that, because all Rosetta score terms must be pairwise decomposable (summable 2-body energies) to keep simulation times fast, Rosetta can not know via a Rosetta score whether there are any buried unsatisfied hydrogen bonds, which can substantially destabilize a structure. Filters and SimpleMetrics help us to account for these limitations. Contrary to their name, filters are often used as metrics at the end of a simulation, rather than as filters that throw out designs.  
+
+In this exercise, we will examine part of the dataset from the de novo protein stability paper by Gabe Rocklin et. al. The dataset we will examine consists of four rounds of design, each containing around 3,000 proteins. Designs were created using FastDesign, with each round having increasingly stringent filters and resfiles. The detailed design protocol can be found in the supplemental material: https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf
+
+First, download the dataset from https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4 to your class folder.
+Unzip the file and `cd` into the folder. 
+
+```bash
+tar -xzvf filter_exercise.tar.gz 
+cd filter_exercise
+```
+
+This workspace contains 4 folders, one from each round of design from the Rocklin paper. Plot all four rounds:
+```bash
+roseasy plot */outputs/
+```
+
+Note that at any time, you can right-click on a point and select ‘open in pymol’ to view the structure in more detail. This may be helpful in explaining what filters are picking up on. 
+
+Set the y-axis to display the `stability score`. **This score represents the experimental results for that design sequence; higher is better.**
+Examine the relationship between stability and a variety of metrics by cycling through different x-axis metrics, making sure to look at the following:
+`Total score`
+`buried_np` (buried nonpolar surface area)
+`unsat_hbond` (# of buried unsatisfied hydrogen bonds)
+`exposed_hydrophobics` (surface area of exposed hydrophobic residues)
+`pack`/`cavity_volume`/`holes` (different ways of measuring the volume of internal cavities in the protein)
+`average_fragment` (averaged backbone RMSDs of protein fragments with similar sequence to design)
+`worst_fragment` (worst backbone RMSD of fragments with similar sequence to design)
+
+**Which metrics seem to correlate with the stability score in earlier rounds? Is there a difference between which metrics are effective in each round?**
+
+**Does the number of buried unsatisfied hydrogen bonds correlate with stability score in this dataset? Given what we know about the energetic 
+cost of buried unsatisfied hydrogen bonds, why might that be?**
+
+**Select a metric that either seems to correlate with stability or has at least 2 distinct clusters, and examine a few structures from either extreme/both clusters in PyMOL. Can you spot any trends in what the metric is picking up on? (For some metrics it may help to enter ‘show sticks, all’ in PyMOL)**
+
 
