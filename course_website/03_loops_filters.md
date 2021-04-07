@@ -112,6 +112,8 @@ depth: 1
 epsilon: 0.5
 ```
 
-Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI:
+Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI (circled in the image below). You should set `epsilon` to 0; this value is a way of tuning how many designs make it through the Pareto optimization (higher numbers means fewer designs). You may want to play around with the `depth` setting; this integer value tells RosEasy how many times to run the Pareto optimization. So if `depth` is set to 2, RosEasy will run a Pareto optimization, remove those designs from consideration, and then run a second Pareto optimization. 
 
 ![Metric names](images/metric_names.png)
+
+Note that in order for a metric to be included in a Pareto front, RosEasy must know whether higher scores or lower scores are better. Normally it detects this via naming conventions, but because these designs were created using another workflow, we have to specify these directions ourselves. For each of your metrics, determine whether higher scores (`+`) or lower scores (`-`) are "better". Then, open `04_designs/outputs/metrics.yml`, locate your metric name, and edit 
