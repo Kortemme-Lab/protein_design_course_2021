@@ -115,7 +115,7 @@ epsilon: 0.5
 
 Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. 
 
-Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI (circled in the image below). 
+Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI axes menus (circled in the image below). 
 
 You should set `epsilon` to 0; this value is a way of tuning how many designs make it through the Pareto optimization (higher numbers means fewer designs). 
 
