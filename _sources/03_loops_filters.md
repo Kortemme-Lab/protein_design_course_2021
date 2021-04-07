@@ -71,13 +71,13 @@ Note that at any time, you can right-click on a point and select ‘open in pymo
 
 Set the y-axis to display the `stability score`. **This score represents the experimental results for that design sequence; higher is better.**
 Examine the relationship between stability and a variety of metrics by cycling through different x-axis metrics, making sure to look at the following:
-`Total score`
-`buried_np` (buried nonpolar surface area)
-`unsat_hbond` (# of buried unsatisfied hydrogen bonds)
-`exposed_hydrophobics` (surface area of exposed hydrophobic residues)
-`pack`/`cavity_volume`/`holes` (different ways of measuring the volume of internal cavities in the protein)
-`average_fragment` (averaged backbone RMSDs of protein fragments with similar sequence to design)
-`worst_fragment` (worst backbone RMSD of fragments with similar sequence to design)
+- `Total score`
+- `buried_np` (buried nonpolar surface area)
+- `unsat_hbond` (# of buried unsatisfied hydrogen bonds)
+- `exposed_hydrophobics` (surface area of exposed hydrophobic residues)
+- `pack`/`cavity_volume`/`holes` (different ways of measuring the volume of internal cavities in the protein)
+- `average_fragment` (averaged backbone RMSDs of protein fragments with similar sequence to design)
+- `worst_fragment` (worst backbone RMSD of fragments with similar sequence to design)
 
 **Which metrics seem to correlate with the stability score in earlier rounds? Is there a difference between which metrics are effective in each round?**
 
