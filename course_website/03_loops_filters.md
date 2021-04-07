@@ -147,3 +147,4 @@ You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on t
 **If at any point you need to start over, you can delete or move the `05_validated_designs` folder (`rm -r 05_validated_designs/`) and re-run the `pick` command.**
 
 **Did your chosen metrics select for stable designs? Are you missing out on a significant number of stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
+ 
