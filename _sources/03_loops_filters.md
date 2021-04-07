@@ -72,6 +72,7 @@ Note that at any time, you can right-click on a point and select ‘open in pymo
 Set the y-axis to display the `stability score`. **This score represents the experimental results for that design sequence; higher is better.**
 Examine the relationship between stability and a variety of metrics by cycling through different x-axis metrics, making sure to look at the following:
 - `Total score`
+- `normalized_score` (Rosetta score divided by design length) 
 - `buried_np` (buried nonpolar surface area)
 - `unsat_hbond` (# of buried unsatisfied hydrogen bonds)
 - `exposed_hydrophobics` (surface area of exposed hydrophobic residues)
@@ -95,7 +96,7 @@ Now that we have some idea of how well each metric correlates with stability, it
 
 We will use Pareto fronts to see if we can use the metrics that seem to correlate with stability score to further increase our chances of picking stable designs. 
 
-Pick 3-4 metrics that you think are predictive of stable designs. You are going to create a "picks" file, which tells RosEasy how to pick designs for computational validation. Picks files have the following format and should have a `.yml` extension:
+Pick 3-5 metrics that you think are predictive of stable designs. You are going to create a "picks" file, which tells RosEasy how to pick designs for computational validation. Picks files have the following format and should have a `.yml` extension:
 
 ```
 threshold:
@@ -112,6 +113,38 @@ depth: 1
 epsilon: 0.5
 ```
 
-Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI:
+Metrics under "threshold" tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now. 
+
+Metrics under `pareto` are included in a pareto optimization. These metric names are the same as the name on the *left* in the plotting GUI axes menus (circled in the image below). 
+
+You should set `epsilon` to 0; this value is a way of tuning how many designs make it through the Pareto optimization (higher numbers means fewer designs). 
+
+You may want to play around with the `depth` setting; this integer value tells RosEasy how many times to run the Pareto optimization. So if `depth` is set to 2, RosEasy will run a Pareto optimization, remove those designs from consideration, and then run a second Pareto optimization. A depth of 4 or 5 seems to be good for this exercise, depending on the number of metrics (for higher numbers of metrics, you may want to use a lower `depth` parameter).  
 
 ![Metric names](images/metric_names.png)
+
+Note that in order for a metric to be included in a Pareto front, RosEasy must know whether higher scores or lower scores are better. Normally it detects this via naming conventions, but because these designs were created using another workflow, we have to specify these directions ourselves. For each of your metrics, determine whether higher scores (`+`) or lower scores (`-`) are "better". 
+
+Then, open  `04_designs/outputs/metrics.yml` in a text editor and locate your metric name. The line above the metric name should say  `- dir: '-'`, indicating that RosEasy thinks lower values are better for this metric. If higher values are better for any of your metrics, change that to  `- dir: '+'` and save the file.
+
+Make a file with the above formatting (do not include thresholds) and name it `picks.yml`. 
+
+Now we are ready to run the Pareto optimization:
+```
+roseasy pick . 5 picks.yml
+```
+
+Depending on the `depth` setting, this may take a few minutes. Once it's finished, see how well your optimization worked by plotting all of the designs as well as the Pareto optimal designs:
+
+```
+roseasy plot 04_designs/outputs/ 05_validated_designs/inputs/
+```
+
+You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on top of the complete set of designs (`04_designs/outputs/`) by shift-clicking in the left-hand menu (may take a couple clicks).  
+
+![Pareto optimized](images/pareto_picks.png)
+
+**If at any point you need to start over, you can delete or move the `05_validated_designs` folder (`rm -r 05_validated_designs/`) and re-run the `pick` command.**
+
+**Did your chosen metrics select for stable designs? Are you missing out on a significant number of stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
+ 
