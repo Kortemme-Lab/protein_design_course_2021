@@ -336,7 +336,7 @@ cost of buried unsatisfied hydrogen bonds, why might that be?</strong></p>
 </pre></div>
 </div>
 <p>Metrics under “threshold” tell RosEasy to throw out any designs that do not meet the threshold. We will not include any thresholds for now.</p>
-<p>Metrics under <code class="docutils literal notranslate"><span class="pre">pareto</span></code> are included in a pareto optimization. These metric names are the same as the name on the <em>left</em> in the plotting GUI (circled in the image below).</p>
+<p>Metrics under <code class="docutils literal notranslate"><span class="pre">pareto</span></code> are included in a pareto optimization. These metric names are the same as the name on the <em>left</em> in the plotting GUI axes menus (circled in the image below).</p>
 <p>You should set <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> to 0; this value is a way of tuning how many designs make it through the Pareto optimization (higher numbers means fewer designs).</p>
 <p>You may want to play around with the <code class="docutils literal notranslate"><span class="pre">depth</span></code> setting; this integer value tells RosEasy how many times to run the Pareto optimization. So if <code class="docutils literal notranslate"><span class="pre">depth</span></code> is set to 2, RosEasy will run a Pareto optimization, remove those designs from consideration, and then run a second Pareto optimization. A depth of 4 or 5 seems to be good for this exercise, depending on the number of metrics (for higher numbers of metrics, you may want to use a lower <code class="docutils literal notranslate"><span class="pre">depth</span></code> parameter).</p>
 <p><img alt="Metric names" src="_images/metric_names.png" /></p>
