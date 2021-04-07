@@ -138,4 +138,4 @@ You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on t
 
 **If at any point you need to start over, you can either delete the `05_validated_designs` folder (`rm -r 05_validated_designs/`) or increment the number in the `picks` command (`roseasy pick . 6 picks.yml`). The latter will create additional folders (in this case `06_validated_designs/`) so your plotting command will change as well.**
 
-**Did your chosen metrics select for stable designs? Are you missing out on some stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
+**Did your chosen metrics select for stable designs? Are you missing out on a significant number of stable designs?** If you have time, try a few different combinations of metrics. **What metrics best predict design success when used in a Pareto front?**
