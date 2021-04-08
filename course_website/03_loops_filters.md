@@ -133,7 +133,7 @@ Now we are ready to run the Pareto optimization:
 roseasy pick . 5 picks.yml
 ```
 
-This command will make a new folder, `05_validated_designs`, and place the selected designs in the `inputs` folder (normally the next step would be to run some sort of validation script on the picked designs). Depending on the `depth` setting, the command may take a few minutes. Once it's finished, see how well your optimization worked by plotting all of the designs as well as the Pareto optimal designs:
+This command will make a new folder, `05_validated_designs`, and place the selected designs in the `inputs` sub-folder (`05_validated_designs/inputs`), as normally the next step would be to run some sort of structure prediction script on the selected designs. Depending on the `depth` setting, the command may take a few minutes. Once it's finished, see how well your optimization worked by plotting all of the designs as well as the Pareto optimal designs:
 
 ```
 roseasy plot 04_designs/outputs/ 05_validated_designs/inputs/
