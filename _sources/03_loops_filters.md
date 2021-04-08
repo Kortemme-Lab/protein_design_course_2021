@@ -141,7 +141,7 @@ This command will make a new folder, `05_validated_designs`, and place the selec
 roseasy plot 04_designs/outputs/ 05_validated_designs/inputs/
 ```
 
-You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on top of the complete set of designs (`04_designs/outputs/`) by shift-clicking in the left-hand menu (may take a couple clicks).  
+You can overlay the Pareto optimal designs (`05_validated_designs/inputs/`) on top of the complete set of designs (`04_designs/outputs/`) by shift-clicking in the left-hand menu (may take a couple clicks). Plot the stability score on the X-axis.  
 
 ![Pareto optimized](images/pareto_picks.png)
 
