@@ -5,10 +5,9 @@ Loop Modeling & Filters Exercise
 
 In this exercise, we will take a look at some results from a few different loop modeling simulations of the adenine-recognition loop in guanylate kinase (residues 167-186).  
 
-Download the prepared RosEasy workspace and unzip its contents:
+Download the prepared RosEasy workspace from [here](https://ucsf.box.com/s/1k4ik9ldq4gllmtsmdmp55svbtjf8hii) to your class folder and unzip its contents:
 
 ```bash
-curl -O <url coming soon>
 tar -xzvf loop_modeling.tar.gz
 cd loop_modeling
 ```
@@ -54,7 +53,7 @@ The Rosetta scorefunction has limitations, both in its ability to accurately pre
 
 In this exercise, we will examine part of the dataset from the de novo protein stability paper by Gabe Rocklin et. al. The dataset we will examine consists of four rounds of design, each containing around 3,000 proteins. Designs were created using FastDesign, with each round having increasingly stringent filters and resfiles. The detailed design protocol can be found in the supplemental material: https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf
 
-First, download the dataset from https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4 to your class folder.
+First, download the dataset (another RosEasy workspace) from https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4 to your class folder.
 Unzip the file and `cd` into the folder. 
 
 ```bash

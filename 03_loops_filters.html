@@ -251,9 +251,8 @@
 <div class="section" id="loop-modeling">
 <h2>Loop modeling<a class="headerlink" href="#loop-modeling" title="Permalink to this headline">¶</a></h2>
 <p>In this exercise, we will take a look at some results from a few different loop modeling simulations of the adenine-recognition loop in guanylate kinase (residues 167-186).</p>
-<p>Download the prepared RosEasy workspace and unzip its contents:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -O &lt;url coming soon&gt;
-tar -xzvf loop_modeling.tar.gz
+<p>Download the prepared RosEasy workspace from <a class="reference external" href="https://ucsf.box.com/s/1k4ik9ldq4gllmtsmdmp55svbtjf8hii">here</a> to your class folder and unzip its contents:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -xzvf loop_modeling.tar.gz
 <span class="nb">cd</span> loop_modeling
 </pre></div>
 </div>
@@ -287,7 +286,7 @@ What type of secondary structure did each of the methods tend to get wrong?</str
 <h2>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h2>
 <p>The Rosetta scorefunction has limitations, both in its ability to accurately predict stability and in its applicability to specific problems. A good example is that, because all Rosetta score terms must be pairwise decomposable (summable 2-body energies) to keep simulation times fast, Rosetta can not know via a Rosetta score whether there are any buried unsatisfied hydrogen bonds, which can substantially destabilize a structure. Filters and SimpleMetrics help us to account for these limitations. Contrary to their name, filters are often used as metrics at the end of a simulation, rather than as filters that throw out designs.</p>
 <p>In this exercise, we will examine part of the dataset from the de novo protein stability paper by Gabe Rocklin et. al. The dataset we will examine consists of four rounds of design, each containing around 3,000 proteins. Designs were created using FastDesign, with each round having increasingly stringent filters and resfiles. The detailed design protocol can be found in the supplemental material: <a class="reference external" href="https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf">https://science.sciencemag.org/content/sci/suppl/2017/07/12/357.6347.168.DC1/aan0693_Rocklin_SM.pdf</a></p>
-<p>First, download the dataset from <a class="reference external" href="https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4">https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4</a> to your class folder.
+<p>First, download the dataset (another RosEasy workspace) from <a class="reference external" href="https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4">https://ucsf.box.com/s/269cgkn7wg4gmw3og93vj4ffd90f7so4</a> to your class folder.
 Unzip the file and <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the folder.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -xzvf filter_exercise.tar.gz 
 <span class="nb">cd</span> filter_exercise
