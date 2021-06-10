@@ -5,7 +5,7 @@ Below you will find detailed instructions for accessing the various online platf
 
 
 ## Box folder with lectures and exercise recordings
-- https://ucsf.box.com/s/ajwi3yl08deslzr9rgouwjsoi0j1p083
+- https://ucsf.app.box.com/folder/134468241371
 
 ## Zoom
 Zoom is our video conferencing app, where we will meet for our daily lecture, discussions, and for introducing the practical exercises.
